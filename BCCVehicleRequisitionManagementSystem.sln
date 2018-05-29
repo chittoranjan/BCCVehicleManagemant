@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCCVehicleRequisitionManagementSystem", "BCCVehicleRequisitionManagementSystem\BCCVehicleRequisitionManagementSystem.csproj", "{D121B4DC-156D-44A7-9287-426B9F34F7CB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{753F1EA6-7E45-4641-BFBC-B79ABD88ED00} = {753F1EA6-7E45-4641-BFBC-B79ABD88ED00}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCCVehicleRequisitionManagementSystem.Models", "BCCVehicleRequisitionManagementSystem.Models\BCCVehicleRequisitionManagementSystem.Models.csproj", "{753F1EA6-7E45-4641-BFBC-B79ABD88ED00}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D121B4DC-156D-44A7-9287-426B9F34F7CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D121B4DC-156D-44A7-9287-426B9F34F7CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D121B4DC-156D-44A7-9287-426B9F34F7CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D121B4DC-156D-44A7-9287-426B9F34F7CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{753F1EA6-7E45-4641-BFBC-B79ABD88ED00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{753F1EA6-7E45-4641-BFBC-B79ABD88ED00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{753F1EA6-7E45-4641-BFBC-B79ABD88ED00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{753F1EA6-7E45-4641-BFBC-B79ABD88ED00}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
