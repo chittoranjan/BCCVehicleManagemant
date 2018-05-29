@@ -1,48 +1,150 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet"/>
+    <link href="~/layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">        
+    @RenderSection("styles", false)
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    @if (User.IsInRole(AppEnum.RoleEnum.Adminstrator.ToString()))
-                    {
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    }
-                    
+<body id="top">
+    <div class="wrapper row0">
+        <!--========Start Top Nav========-->
+        <div id="topbar" class="hoc clear">
+            <div class="fl_left">
+                <ul>
+                    <li><i class="fa fa-phone"></i> +88 (02) 456 890</li>
+                    <li><i class="fa fa-envelope-o"></i> info@domain.com</li>
                 </ul>
-                @Html.Partial("_LoginPartial")
+            </div>
+            <div class="fl_right">
+                <ul>
+                    <li><a href="@Url.Action("Index", "Home")"><i class="fa fa-lg fa-home"></i></a></li>
+                    <li>@Html.Partial("_LoginPartial")</li>
+
+                </ul>
             </div>
         </div>
-    </div>
+    </div> <!--========End Top Nav========-->
+
+    <div class="wrapper row1">
+        <!--========Start Main Nav========-->
+        <header id="header" class="hoc clear">
+            <div id="logo" class="fl_left">
+                <h1><a href="@Url.Action("Index","Home")">BCC</a></h1>
+            </div>
+            <nav id="mainav" class="fl_right">
+                <ul class="clear">
+                    <li class="active"><a href="@Url.Action("Index","Home")">Home</a></li>
+                    <li>
+                        <a class="drop" href="#">Pages</a>
+                        <ul>
+                            <li><a href="pages/gallery.html">Gallery</a></li>
+                            <li><a href="pages/full-width.html">Full Width</a></li>
+                            <li><a href="pages/sidebar-left.html">Sidebar Left</a></li>
+                            <li><a href="pages/sidebar-right.html">Sidebar Right</a></li>
+                            <li><a href="pages/basic-grid.html">Basic Grid</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="drop" href="#">Dropdown</a>
+                        <ul>
+                            <li><a href="#">Level 2</a></li>
+                            <li>
+                                <a class="drop" href="#">Level 2 + Drop</a>
+                                <ul>
+                                    <li><a href="#">Level 3</a></li>
+                                    <li><a href="#">Link Text</a></li>
+                                    <li><a href="#">Link Text</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Level 2</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="@Url.Action("About","Home")">About</a></li>
+                    <li><a href="@Url.Action("Contact","Home")">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div><!--========End Main Nav========-->
+    @*========Render Body========*@
     <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+            @RenderBody()
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+
+    <!--========Footer ========-->
+    <div class="wrapper row4">
+        <footer id="footer" class="hoc clear">
+            <div class="one_third first">
+                <h6 class="heading">Exative</h6>
+                <nav>
+                    <ul class="nospace">
+                        <li><a href="#"><i class="fa fa-lg fa-home"></i></a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Cookies</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                        <li><a href="#">Online Shop</a></li>
+                        <li><a href="#">Sitemap</a></li>
+                    </ul>
+                </nav>
+                <ul class="faico clear">
+                    <li><a class="faicon-facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a class="faicon-twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a class="faicon-dribble" href="#"><i class="fa fa-dribbble"></i></a></li>
+                    <li><a class="faicon-linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a class="faicon-google-plus" href="#"><i class="fa fa-google-plus"></i></a></li>
+                    <li><a class="faicon-vk" href="#"><i class="fa fa-vk"></i></a></li>
+                </ul>
+            </div>
+            <div class="one_third">
+                <h6 class="heading">Aenean molestie velit</h6>
+                <ul class="nospace linklist contact">
+                    <li>
+                        <i class="fa fa-map-marker"></i>
+                        <address>
+                            Street Name &amp; Number, Town, Postcode/Zip
+                        </address>
+                    </li>
+                    <li><i class="fa fa-phone"></i> +00 (123) 456 7890</li>
+                    <li><i class="fa fa-envelope-o"></i> info@domain.com</li>
+                </ul>
+            </div>
+            <div class="one_third">
+                <h6 class="heading">Aliquam sit condimentum</h6>
+                <form method="post" action="#">
+                    <fieldset>
+                        <legend>Newsletter:</legend>
+                        <input class="btmspace-15" type="text" value="" placeholder="Name">
+                        <input class="btmspace-15" type="text" value="" placeholder="Email">
+                        <button type="submit" value="submit">Submit</button>
+                    </fieldset>
+                </form>
+            </div>
+        </footer>
+    </div><!--========End Footer ========-->
+    <!--========Copyright section ========-->
+    <div class="wrapper row5">
+        <div id="copyright" class="hoc clear">
+            <p class="fl_left">Copyright &copy; 2016 - All Rights Reserved - <a href="#">Domain Name</a></p>
+            <p class="fl_right">Template by <a target="_blank" href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+        </div>
+    </div><!--========End Copyright section ========-->
+
+
+    <a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
+    <!-- JAVASCRIPTS -->
+    <script src="~/layout/scripts/jquery.min.js"></script>
+    <script src="~/layout/scripts/jquery.backtotop.js"></script>
+    <script src="~/layout/scripts/jquery.mobilemenu.js"></script>
+    <script src="~/layout/scripts/jquery.flexslider-min.js"></script>
+
+    @RenderSection("scripts", false)
 </body>
 </html>
