@@ -21,7 +21,7 @@
             </div>
             <div class="fl_right">
                 <ul>
-                    <li><a href="@Url.Action("Index", "Home")"><i class="fa fa-lg fa-home"></i></a></li>
+                    <li><a href="@Url.Action("Index", "Home")" title="Home"><i class="fa fa-lg fa-home"></i></a></li>
                     <li>@Html.Partial("_LoginPartial")</li>
 
                 </ul>
@@ -37,32 +37,54 @@
             </div>
             <nav id="mainav" class="fl_right">
                 <ul class="clear">
-                    <li class="active"><a href="@Url.Action("Index","Home")">Home</a></li>
-                    <li>
-                        <a class="drop" href="#">Pages</a>
-                        <ul>
-                            <li><a href="pages/gallery.html">Gallery</a></li>
-                            <li><a href="pages/full-width.html">Full Width</a></li>
-                            <li><a href="pages/sidebar-left.html">Sidebar Left</a></li>
-                            <li><a href="pages/sidebar-right.html">Sidebar Right</a></li>
-                            <li><a href="pages/basic-grid.html">Basic Grid</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="drop" href="#">Dropdown</a>
-                        <ul>
-                            <li><a href="#">Level 2</a></li>
-                            <li>
-                                <a class="drop" href="#">Level 2 + Drop</a>
-                                <ul>
-                                    <li><a href="#">Level 3</a></li>
-                                    <li><a href="#">Link Text</a></li>
-                                    <li><a href="#">Link Text</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Level 2</a></li>
-                        </ul>
-                    </li>
+                    <li class="active"><a href="@Url.Action("Index", "Home")">Home</a></li>
+
+                    @if (User.IsInRole(AppEnum.RoleEnum.User.ToString()))
+                    {
+                        <li class=""><a href="@Url.Action("Index", "Home")">My Profile</a></li>
+                        <li class=""><a href="@Url.Action("Index", "Home")">Requisition</a></li>
+                        <li class=""><a href="@Url.Action("Index","Home")">Vehicle Search</a></li>
+                        <li class=""><a href="@Url.Action("Index","Home")">My Requisition</a></li>
+                        <li class=""><a href="@Url.Action("Index","Home")">Feedback</a></li>
+                    }
+                    @if (User.IsInRole(AppEnum.RoleEnum.Adminstrator.ToString()))
+                    {
+                        <li>
+                            <a class="drop" href="#">Vehicle</a>
+                            <ul>
+                                <li><a href="#">Vehicle List</a></li>
+                                <li>
+                                    <a class="drop" href="#">Create Vehicle</a>
+                                    <ul>
+                                        <li><a href="#">Vehicle Type</a></li>
+                                        <li><a href="#">Add Vehicle</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="drop" href="#">Driver</a>
+                            <ul>
+                                <li><a href="@Url.Action("Index", "Home")">Add Driver</a></li>
+                                <li><a href="@Url.Action("Index", "Home")">Driver List</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="drop" href="#">User</a>
+                            <ul>
+                                <li><a href="#">User List</a></li>
+                                <li>
+                                    <a class="drop" href="#">Create User</a>
+                                    <ul>
+                                        <li><a href="#">Add Designation</a></li>
+                                        <li><a href="#">Add User</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="@Url.Action("Index", "Home")">Requisition</a></li>
+                        <li><a href="@Url.Action("Index", "Home")">Gate Pass</a></li>
+                    }
 
                     <li><a href="@Url.Action("About","Home")">About</a></li>
                     <li><a href="@Url.Action("Contact","Home")">Contact</a></li>
