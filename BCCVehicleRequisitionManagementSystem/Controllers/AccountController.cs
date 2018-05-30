@@ -153,9 +153,9 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var role=new IdentityUserRole();
+                var role = new IdentityUserRole();
                 role.UserId = user.Id;
-                role.RoleId = "8c8dad65-234a-499f-8f35-4733202c85a6";
+                role.RoleId = "5bb10e81-d82c-43c4-aae4-ee4981373f9e";
 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

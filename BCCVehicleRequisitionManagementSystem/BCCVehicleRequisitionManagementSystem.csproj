@@ -186,9 +186,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\BCCVehicleRequisitionManagementSystem.mdf" />
-    <Content Include="App_Data\BCCVehicleRequisitionManagementSystem_log.ldf">
-      <DependentUpon>BCCVehicleRequisitionManagementSystem.mdf</DependentUpon>
+    <Content Include="App_Data\BCCVehicleRequisitionManagement.mdf" />
+    <Content Include="App_Data\BCCVehicleRequisitionManagement_log.ldf">
+      <DependentUpon>BCCVehicleRequisitionManagement.mdf</DependentUpon>
     </Content>
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Antlr3.Runtime.pdb" />

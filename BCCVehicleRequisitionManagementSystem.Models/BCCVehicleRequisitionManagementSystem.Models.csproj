@@ -50,14 +50,38 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseContext\VehicleDbContext.cs" />
+    <Compile Include="EntityModels\Driver.cs" />
+    <Compile Include="EntityModels\DriverVehicle.cs" />
+    <Compile Include="EntityModels\Employee.cs" />
+    <Compile Include="EntityModels\EmployeeDesignation.cs" />
+    <Compile Include="EntityModels\GatePass.cs" />
+    <Compile Include="EntityModels\Vehicle.cs" />
+    <Compile Include="EntityModels\VehicleType.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="EntityModels\" />
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="bin\Debug\BCCVehicleRequisitionManagementSystem.Models.dll.config" />
+    <None Include="obj\Debug\BCCVehicleRequisitionManagementSystem.Models.csprojResolveAssemblyReference.cache" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\BCCVehicleRequisitionManagementSystem.Models.dll" />
+    <Content Include="bin\Debug\BCCVehicleRequisitionManagementSystem.Models.pdb" />
+    <Content Include="bin\Debug\EntityFramework.dll" />
+    <Content Include="bin\Debug\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\Debug\EntityFramework.SqlServer.xml" />
+    <Content Include="bin\Debug\EntityFramework.xml" />
+    <Content Include="obj\Debug\BCCVehicleRequisitionManagementSystem.Models.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\BCCVehicleRequisitionManagementSystem.Models.dll" />
+    <Content Include="obj\Debug\BCCVehicleRequisitionManagementSystem.Models.pdb" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
