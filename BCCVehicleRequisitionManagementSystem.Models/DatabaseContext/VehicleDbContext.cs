@@ -14,5 +14,13 @@ namespace BCCVehicleRequisitionManagementSystem.Models.DatabaseContext
             //
         }
 
+        public System.Data.Entity.DbSet<BCCVehicleRequisitionManagementSystem.Models.EntityModels.VehicleType> VehicleTypes { get; set; }
+        public System.Data.Entity.DbSet<BCCVehicleRequisitionManagementSystem.Models.EntityModels.Vehicle> Vehicles { get; set; }
+        public System.Data.Entity.DbSet<BCCVehicleRequisitionManagementSystem.Models.EntityModels.Driver> Drivers { get; set; }
+        public System.Data.Entity.DbSet<BCCVehicleRequisitionManagementSystem.Models.EntityModels.Department> Departments { get; set; }
+        public System.Data.Entity.DbSet<BCCVehicleRequisitionManagementSystem.Models.EntityModels.EmployeeDesignation> EmployeeDesignations { get; set; }
+        public System.Data.Entity.DbSet<BCCVehicleRequisitionManagementSystem.Models.EntityModels.Employee> Employees { get; set; }
+        
+       
     }
 }

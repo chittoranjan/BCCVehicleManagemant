@@ -29,5 +29,7 @@ namespace BCCVehicleRequisitionManagementSystem.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<BCCVehicleRequisitionManagementSystem.Models.EntityModels.Driver> Drivers { get; set; }
     }
 }

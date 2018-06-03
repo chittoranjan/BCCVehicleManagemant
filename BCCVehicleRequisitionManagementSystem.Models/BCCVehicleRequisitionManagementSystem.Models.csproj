@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseContext\VehicleDbContext.cs" />
+    <Compile Include="EntityModels\Department.cs" />
     <Compile Include="EntityModels\Driver.cs" />
     <Compile Include="EntityModels\DriverVehicle.cs" />
     <Compile Include="EntityModels\Employee.cs" />
@@ -57,6 +58,19 @@
     <Compile Include="EntityModels\GatePass.cs" />
     <Compile Include="EntityModels\Vehicle.cs" />
     <Compile Include="EntityModels\VehicleType.cs" />
+    <Compile Include="Migrations\201806021525274_InitialCreate.cs" />
+    <Compile Include="Migrations\201806021525274_InitialCreate.Designer.cs">
+      <DependentUpon>201806021525274_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806021602216_driver_model_added.cs" />
+    <Compile Include="Migrations\201806021602216_driver_model_added.Designer.cs">
+      <DependentUpon>201806021602216_driver_model_added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806021658486_Department_employeeDesignation_and_Employee_model_added.cs" />
+    <Compile Include="Migrations\201806021658486_Department_employeeDesignation_and_Employee_model_added.Designer.cs">
+      <DependentUpon>201806021658486_Department_employeeDesignation_and_Employee_model_added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
@@ -82,6 +96,17 @@
     <Content Include="obj\Debug\BCCVehicleRequisitionManagementSystem.Models.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\BCCVehicleRequisitionManagementSystem.Models.dll" />
     <Content Include="obj\Debug\BCCVehicleRequisitionManagementSystem.Models.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201806021525274_InitialCreate.resx">
+      <DependentUpon>201806021525274_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806021602216_driver_model_added.resx">
+      <DependentUpon>201806021602216_driver_model_added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806021658486_Department_employeeDesignation_and_Employee_model_added.resx">
+      <DependentUpon>201806021658486_Department_employeeDesignation_and_Employee_model_added.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

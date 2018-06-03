@@ -52,12 +52,18 @@
                         <li>
                             <a class="drop" href="#">Vehicle</a>
                             <ul>
-                                <li><a href="#">Vehicle List</a></li>
                                 <li>
-                                    <a class="drop" href="#">Create Vehicle</a>
+                                    <a class="drop" href="#">VehicleType</a>
                                     <ul>
-                                        <li><a href="#">Vehicle Type</a></li>
-                                        <li><a href="#">Add Vehicle</a></li>
+                                        <li><a href="@Url.Action("Create", "VehicleTypes")">Create Vehicle Type</a></li>
+                                        <li><a href="@Url.Action("Index", "VehicleTypes")">Vehicle Type List</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="drop" href="#">Vehicle</a>
+                                    <ul>
+                                        <li><a href="@Url.Action("Create", "Vehicles")">Create Vehicle Type</a></li>
+                                        <li><a href="@Url.Action("Index", "Vehicles")">Vehicle List</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -65,19 +71,32 @@
                         <li>
                             <a class="drop" href="#">Driver</a>
                             <ul>
-                                <li><a href="@Url.Action("Index", "Home")">Add Driver</a></li>
-                                <li><a href="@Url.Action("Index", "Home")">Driver List</a></li>
+                                <li><a href="@Url.Action("Create", "Drivers")">Add Driver</a></li>
+                                <li><a href="@Url.Action("Index", "Drivers")">Driver List</a></li>
                             </ul>
                         </li>
                         <li>
                             <a class="drop" href="#">User</a>
                             <ul>
-                                <li><a href="#">User List</a></li>
                                 <li>
-                                    <a class="drop" href="#">Create User</a>
+                                    <a class="drop" href="#">Department</a>
                                     <ul>
-                                        <li><a href="#">Add Designation</a></li>
-                                        <li><a href="#">Add User</a></li>
+                                        <li><a href="@Url.Action("Create","Departments")">Add Department</a></li>
+                                        <li><a href="@Url.Action("Index","Departments")">Department List</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="drop" href="#">Designation</a>
+                                    <ul>
+                                        <li><a href="@Url.Action("Create","EmployeeDesignations")">Add Designation</a></li>
+                                        <li><a href="@Url.Action("Index","EmployeeDesignations")">Designation List</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="drop" href="#">Employee</a>
+                                    <ul>
+                                        <li><a href="@Url.Action("Create","Employees")">Add Employee</a></li>
+                                        <li><a href="@Url.Action("Index","Employees")">Employee List</a></li>
                                     </ul>
                                 </li>
                             </ul>
