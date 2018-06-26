@@ -175,6 +175,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\DriversController.cs" />
+    <Compile Include="Controllers\DriverVehiclesController.cs" />
     <Compile Include="Controllers\EmployeeDesignationsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -384,6 +385,11 @@
     <Content Include="Views\Employees\Details.cshtml" />
     <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\DriverVehicles\Create.cshtml" />
+    <Content Include="Views\DriverVehicles\Delete.cshtml" />
+    <Content Include="Views\DriverVehicles\Details.cshtml" />
+    <Content Include="Views\DriverVehicles\Edit.cshtml" />
+    <Content Include="Views\DriverVehicles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

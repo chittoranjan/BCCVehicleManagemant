@@ -12,6 +12,7 @@ namespace BCCVehicleRequisitionManagementSystem.Models.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        Name=c.String(nullable: false, maxLength: 250),
                         VehicleTypeId = c.Int(nullable: false),
                         RegistrationNo = c.String(nullable: false, maxLength: 6),
                         Description = c.String(),

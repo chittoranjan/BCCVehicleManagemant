@@ -156,6 +156,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
                 var role = new IdentityUserRole();
                 role.UserId = user.Id;
                 role.RoleId = "5bb10e81-d82c-43c4-aae4-ee4981373f9e";
+                user.Roles.Add(role);
 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

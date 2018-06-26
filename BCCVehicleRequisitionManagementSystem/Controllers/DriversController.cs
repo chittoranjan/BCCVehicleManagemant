@@ -7,13 +7,14 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BCCVehicleRequisitionManagementSystem.Models;
+using BCCVehicleRequisitionManagementSystem.Models.DatabaseContext;
 using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
 
 namespace BCCVehicleRequisitionManagementSystem.Controllers
 {
     public class DriversController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private VehicleDbContext db = new VehicleDbContext();
 
         // GET: Drivers
         public ActionResult Index()

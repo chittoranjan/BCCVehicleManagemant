@@ -7,6 +7,10 @@ namespace BCCVehicleRequisitionManagementSystem.Models.EntityModels
         [Key]
         public int Id { get; set; }
 
+        [Required(ErrorMessage = "Please input vehicle name!")]
+        [Display(Name = "Vehicle Name"),StringLength(250)]
+        public string Name { get; set; }
+
         [Required(ErrorMessage = "Select vehicle type")]
         [Display(Name = "Vehicle Type")]
         public int VehicleTypeId { get; set; }
