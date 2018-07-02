@@ -30,6 +30,5 @@ namespace BCCVehicleRequisitionManagementSystem.Models
         public string Address { get; set; }
 
         public bool IsDelete { get; set; }
-        public RegisterViewModel RegisterViewModel { get; set; }
     }
 }

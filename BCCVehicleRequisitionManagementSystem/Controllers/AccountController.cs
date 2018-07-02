@@ -142,6 +142,9 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            VehicleDbContext db=new VehicleDbContext();
+           ViewData["Employee.EmployeeDesignationId"] = new SelectList(db.EmployeeDesignations, "Id", "Designation");
+            ViewData["Employee.DepartmentId"] = new SelectList(db.Departments, "Id", "Name");
             return View();
         }
 
@@ -159,6 +162,23 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
                 role.UserId = user.Id;
                 role.RoleId = "5bb10e81-d82c-43c4-aae4-ee4981373f9e";
                 user.Roles.Add(role);
+
+
+                Employee employee = new Employee();
+                employee.Name = model.Employee.Name;
+                employee.EmployeeDesignationId = model.Employee.EmployeeDesignationId;
+                employee.DepartmentId = model.Employee.DepartmentId;
+                employee.ContactNo = model.Employee.ContactNo;
+                employee.Address = model.Employee.Address;
+                employee.IsDelete = model.Employee.IsDelete;
+                employee.UserId = user.Id;
+
+                int resultEmp = 0;
+                using (var db = new VehicleDbContext())
+                {
+                    db.Employees.Add(employee);
+                    resultEmp = db.SaveChanges();
+                }
 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -180,66 +200,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/EmployeeRegister
-        [AllowAnonymous]
-        public ActionResult EmployeeRegister()
-        {
-            return View();
-        }
 
-        //
-        // POST: /Account/EmployeeRegister
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EmployeeRegister(EmployeeViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = model.RegisterViewModel.Email, Email = model.RegisterViewModel.Email };
-                var role = new IdentityUserRole();
-                role.UserId = user.Id;
-                role.RoleId = "5bb10e81-d82c-43c4-aae4-ee4981373f9e";
-                user.Roles.Add(role);
-
-                Employee  employee=new Employee();
-                employee.Name = model.Name;
-                employee.EmployeeDesignationId = model.EmployeeDesignationId;
-                employee.DepartmentId = model.DepartmentId;
-                employee.ContactNo = model.ContactNo;
-                employee.Address = model.Address;
-                employee.IsDelete = model.IsDelete;
-                employee.UserId = user.Id;
-
-                int resultEmp = 0;
-                using (var db=new VehicleDbContext())
-                {
-                    db.Employees.Add(employee);
-                    resultEmp=db.SaveChanges();
-                }
-                if (resultEmp>0)
-                {
-                    var result = await UserManager.CreateAsync(user, model.RegisterViewModel.Password);
-                    if (result.Succeeded)
-                    {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                        // Send an email with this link
-                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                        return RedirectToAction("Index", "Home");
-                    }
-                    AddErrors(result);
-                }
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]

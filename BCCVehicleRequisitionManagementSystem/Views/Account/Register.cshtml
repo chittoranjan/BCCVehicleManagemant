@@ -11,6 +11,44 @@
     <h4>Create a new account.</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Employee.Name, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Employee.Name, new {@class = "form-control"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Employee.DepartmentId, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.DropDownList("Employee.DepartmentId", null,"Select Department", new {@class = "form-control"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Employee.EmployeeDesignationId, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.DropDownList("Employee.EmployeeDesignationId", null,"Select Designation", new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Employee.Address, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Employee.Address, new {@class = "form-control"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Employee.ContactNo, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Employee.ContactNo, new {@class = "form-control"})
+        </div>
+    </div>
+
+
+
     <div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
