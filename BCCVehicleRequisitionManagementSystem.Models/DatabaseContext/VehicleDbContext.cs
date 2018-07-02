@@ -24,5 +24,6 @@ namespace BCCVehicleRequisitionManagementSystem.Models.DatabaseContext
         public System.Data.Entity.DbSet<BCCVehicleRequisitionManagementSystem.Models.EntityModels.Employee> Employees { get; set; }
 
         public System.Data.Entity.DbSet<BCCVehicleRequisitionManagementSystem.Models.EntityModels.DriverVehicle> DriverVehicles { get; set; }
+
     }
 }

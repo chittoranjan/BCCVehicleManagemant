@@ -177,7 +177,6 @@
     <Compile Include="Controllers\DriversController.cs" />
     <Compile Include="Controllers\DriverVehiclesController.cs" />
     <Compile Include="Controllers\EmployeeDesignationsController.cs" />
-    <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\VehiclesController.cs" />
@@ -191,6 +190,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\EmployeeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
@@ -380,11 +380,6 @@
     <Content Include="Views\EmployeeDesignations\Details.cshtml" />
     <Content Include="Views\EmployeeDesignations\Edit.cshtml" />
     <Content Include="Views\EmployeeDesignations\Index.cshtml" />
-    <Content Include="Views\Employees\Create.cshtml" />
-    <Content Include="Views\Employees\Delete.cshtml" />
-    <Content Include="Views\Employees\Details.cshtml" />
-    <Content Include="Views\Employees\Edit.cshtml" />
-    <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\DriverVehicles\Create.cshtml" />
     <Content Include="Views\DriverVehicles\Delete.cshtml" />
     <Content Include="Views\DriverVehicles\Details.cshtml" />
