@@ -3,7 +3,7 @@ using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
 
 namespace BCCVehicleRequisitionManagementSystem.Models
 {
-    public class EmployeeViewModel
+    public class EmployeeRegistrationViewModel
     {
         public int Id { get; set; }
 
@@ -29,7 +29,7 @@ namespace BCCVehicleRequisitionManagementSystem.Models
         [Required(ErrorMessage = "Please input present address!")]
         public string Address { get; set; }
 
+        public string UserId { get; set; }
         public bool IsDelete { get; set; }
-        public RegisterViewModel RegisterViewModel { get; set; }
     }
 }

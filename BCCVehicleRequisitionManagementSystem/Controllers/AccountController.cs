@@ -141,8 +141,13 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
-        {
-            return View();
+        {      
+            VehicleDbContext db=new VehicleDbContext();
+                 
+            ViewData["EmployeeRegistration.EmployeeDesignationId"] =new SelectList(db.EmployeeDesignations,"Id", "Designation"); 
+            ViewData["EmployeeRegistration.DepartmentId"] =new SelectList(db.Departments,"Id","Name");
+
+            return View();         
         }
 
         //
@@ -157,70 +162,26 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var role = new IdentityUserRole();
                 role.UserId = user.Id;
-                role.RoleId = "5bb10e81-d82c-43c4-aae4-ee4981373f9e";
+                role.RoleId = "3998b1cd-2645-4a04-a3ab-cc41a9269671";
                 user.Roles.Add(role);
 
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                    return RedirectToAction("Index", "Home");
-                }
-                AddErrors(result);
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
-
-        //
-        // GET: /Account/EmployeeRegister
-        [AllowAnonymous]
-        public ActionResult EmployeeRegister()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Account/EmployeeRegister
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EmployeeRegister(EmployeeViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = model.RegisterViewModel.Email, Email = model.RegisterViewModel.Email };
-                var role = new IdentityUserRole();
-                role.UserId = user.Id;
-                role.RoleId = "5bb10e81-d82c-43c4-aae4-ee4981373f9e";
-                user.Roles.Add(role);
-
-                Employee  employee=new Employee();
-                employee.Name = model.Name;
-                employee.EmployeeDesignationId = model.EmployeeDesignationId;
-                employee.DepartmentId = model.DepartmentId;
-                employee.ContactNo = model.ContactNo;
-                employee.Address = model.Address;
-                employee.IsDelete = model.IsDelete;
+                Employee employee=new Employee();
+                employee.Name = model.EmployeeRegistration.Name;
+                employee.EmployeeDesignationId = model.EmployeeRegistration.EmployeeDesignationId;
+                employee.DepartmentId = model.EmployeeRegistration.DepartmentId;
+                employee.Address = model.EmployeeRegistration.Address;
+                employee.ContactNo = model.EmployeeRegistration.ContactNo;
                 employee.UserId = user.Id;
 
-                int resultEmp = 0;
+                var empCount = 0;
                 using (var db=new VehicleDbContext())
                 {
                     db.Employees.Add(employee);
-                    resultEmp=db.SaveChanges();
+                    empCount=db.SaveChanges();
                 }
-                if (resultEmp>0)
+                if (empCount>0)
                 {
-                    var result = await UserManager.CreateAsync(user, model.RegisterViewModel.Password);
+                    var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
@@ -240,6 +201,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
