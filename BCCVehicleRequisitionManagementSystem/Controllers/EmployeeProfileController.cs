@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using BCCVehicleRequisitionManagementSystem.Models.DatabaseContext;
 using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
+using Microsoft.AspNet.Identity;
 
 namespace BCCVehicleRequisitionManagementSystem.Controllers
 {
@@ -18,7 +19,8 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         // GET: EmployeeProfile
         public ActionResult Index()
         {
-            var employees = db.Employees.Include(e => e.Department).Include(e => e.EmployeeDesignation);
+            var userId = User.Identity.GetUserId();
+            var employees = db.Employees.Where(c=>c.UserId==userId).Include(c=>c.EmployeeDesignation).Include(c=>c.Department);
             return View(employees.ToList());
         }
 
