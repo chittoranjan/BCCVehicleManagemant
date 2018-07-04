@@ -1,4 +1,4 @@
-﻿@model BCCVehicleRequisitionManagementSystem.Models.EntityModels.Vehicle
+﻿@model BCCVehicleRequisitionManagementSystem.ViewModels.VehicleViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -39,14 +39,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDelete)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsDelete)
         </dd>
 
     </dl>

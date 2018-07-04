@@ -8,18 +8,21 @@ using System.Web;
 using System.Web.Mvc;
 using BCCVehicleRequisitionManagementSystem.Models.DatabaseContext;
 using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
+using BCCVehicleRequisitionManagementSystem.ViewModels;
+using BLL;
 
 namespace BCCVehicleRequisitionManagementSystem.Controllers
 {
     public class VehiclesController : Controller
     {
-        private VehicleDbContext db = new VehicleDbContext();
+        readonly VehicleManager _vehicleManager=new VehicleManager();
+        VehicleDbContext db=new VehicleDbContext();
 
         // GET: Vehicles
         public ActionResult Index()
         {
-            var vehicles = db.Vehicles.Include(v => v.VehicleType);
-            return View(vehicles.ToList());
+            
+            return View(_vehicleManager.GetAll());
         }
 
         // GET: Vehicles/Details/5
@@ -29,12 +32,18 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicle vehicle = db.Vehicles.Find(id);
+            Vehicle vehicle = _vehicleManager.GetById((int)id);
             if (vehicle == null)
             {
                 return HttpNotFound();
             }
-            return View(vehicle);
+            VehicleViewModel vehicleVm=new VehicleViewModel();
+            vehicleVm.Name = vehicle.Name;
+            vehicleVm.RegistrationNo = vehicle.RegistrationNo;
+            vehicleVm.VehicleTypeId = vehicle.VehicleTypeId;
+            vehicleVm.Description = vehicle.Description;
+
+            return View(vehicleVm);
         }
 
         // GET: Vehicles/Create
@@ -49,17 +58,22 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,VehicleTypeId,RegistrationNo,Description,IsDelete")] Vehicle vehicle)
+        public ActionResult Create([Bind(Include = "Id,Name,VehicleTypeId,RegistrationNo,Description")] VehicleViewModel vehicleVm)
         {
             if (ModelState.IsValid)
             {
-                db.Vehicles.Add(vehicle);
-                db.SaveChanges();
+                Vehicle vehicle=new Vehicle();
+                vehicle.Name = vehicleVm.Name;
+                vehicle.RegistrationNo = vehicleVm.RegistrationNo;
+                vehicle.VehicleTypeId = vehicleVm.VehicleTypeId;
+                vehicle.Description = vehicleVm.Description;
+
+                _vehicleManager.Add(vehicle);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "TypeName", vehicle.VehicleTypeId);
-            return View(vehicle);
+            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "TypeName", vehicleVm.VehicleTypeId);
+            return View(vehicleVm);
         }
 
         // GET: Vehicles/Edit/5
@@ -69,13 +83,20 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicle vehicle = db.Vehicles.Find(id);
+            Vehicle vehicle = _vehicleManager.GetById((int)id);
             if (vehicle == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "TypeName", vehicle.VehicleTypeId);
-            return View(vehicle);
+
+            VehicleViewModel vehicleVm = new VehicleViewModel();
+            vehicleVm.Name = vehicle.Name;
+            vehicleVm.RegistrationNo = vehicle.RegistrationNo;
+            vehicleVm.VehicleTypeId = vehicle.VehicleTypeId;
+            vehicleVm.Description = vehicle.Description;
+
+            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "TypeName", vehicleVm.VehicleTypeId);
+            return View(vehicleVm);
         }
 
         // POST: Vehicles/Edit/5
@@ -83,16 +104,21 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,VehicleTypeId,RegistrationNo,Description,IsDelete")] Vehicle vehicle)
+        public ActionResult Edit([Bind(Include = "Id,VehicleTypeId,RegistrationNo,Description")] VehicleViewModel vehicleVm)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(vehicle).State = EntityState.Modified;
-                db.SaveChanges();
+                Vehicle vehicle = new Vehicle();
+                vehicle.Name = vehicleVm.Name;
+                vehicle.RegistrationNo = vehicleVm.RegistrationNo;
+                vehicle.VehicleTypeId = vehicleVm.VehicleTypeId;
+                vehicle.Description = vehicleVm.Description;
+
+                _vehicleManager.Update(vehicle);
                 return RedirectToAction("Index");
             }
-            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "TypeName", vehicle.VehicleTypeId);
-            return View(vehicle);
+            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "TypeName", vehicleVm.VehicleTypeId);
+            return View(vehicleVm);
         }
 
         // GET: Vehicles/Delete/5
@@ -102,12 +128,19 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vehicle vehicle = db.Vehicles.Find(id);
+            Vehicle vehicle = _vehicleManager.GetById((int)id);
             if (vehicle == null)
             {
                 return HttpNotFound();
             }
-            return View(vehicle);
+            VehicleViewModel vehicleVm = new VehicleViewModel();
+            vehicleVm.Id = vehicle.Id;
+            vehicleVm.Name = vehicle.Name;
+            vehicleVm.RegistrationNo = vehicle.RegistrationNo;
+            vehicleVm.VehicleTypeId = vehicle.VehicleTypeId;
+            vehicleVm.Description = vehicle.Description;
+
+            return View(vehicleVm);
         }
 
         // POST: Vehicles/Delete/5
@@ -115,9 +148,8 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Vehicle vehicle = db.Vehicles.Find(id);
-            db.Vehicles.Remove(vehicle);
-            db.SaveChanges();
+            Vehicle vehicle = _vehicleManager.GetById(id);
+            _vehicleManager.Remove(vehicle);
             return RedirectToAction("Index");
         }
 
@@ -126,6 +158,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             if (disposing)
             {
                 db.Dispose();
+                _vehicleManager.Dispose();
             }
             base.Dispose(disposing);
         }

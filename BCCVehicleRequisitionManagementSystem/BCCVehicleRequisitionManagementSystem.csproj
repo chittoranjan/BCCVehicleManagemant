@@ -200,6 +200,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\EmployeeProfileViewModel.cs" />
+    <Compile Include="ViewModels\VehicleViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\BCCVehicleRequisitionManagement.mdf" />
@@ -409,6 +410,10 @@
     <ProjectReference Include="..\BCCVehicleRequisitionManagementSystem.Models\BCCVehicleRequisitionManagementSystem.Models.csproj">
       <Project>{753f1ea6-7e45-4641-bfbc-b79abd88ed00}</Project>
       <Name>BCCVehicleRequisitionManagementSystem.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BLL\BCCVehicleRequisitionManagementSystem.BLL.csproj">
+      <Project>{d98bcb8c-137a-468b-b040-40c237678f8a}</Project>
+      <Name>BCCVehicleRequisitionManagementSystem.BLL</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
