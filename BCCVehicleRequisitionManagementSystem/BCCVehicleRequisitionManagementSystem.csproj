@@ -177,7 +177,6 @@
     <Compile Include="Controllers\DriversController.cs" />
     <Compile Include="Controllers\DriverVehiclesController.cs" />
     <Compile Include="Controllers\EmployeeDesignationsController.cs" />
-    <Compile Include="Controllers\EmployeeProfileController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -200,7 +199,7 @@
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\EmployeeRegistrationViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeProfileViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\BCCVehicleRequisitionManagement.mdf" />
@@ -393,11 +392,7 @@
     <Content Include="Views\Employees\Details.cshtml" />
     <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
-    <Content Include="Views\EmployeeProfile\Create.cshtml" />
-    <Content Include="Views\EmployeeProfile\Delete.cshtml" />
-    <Content Include="Views\EmployeeProfile\Details.cshtml" />
-    <Content Include="Views\EmployeeProfile\Edit.cshtml" />
-    <Content Include="Views\EmployeeProfile\Index.cshtml" />
+    <Content Include="Views\Employees\EmployeeProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

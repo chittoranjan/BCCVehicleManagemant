@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using BCCVehicleRequisitionManagementSystem.Models.DatabaseContext;
 using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
+using BCCVehicleRequisitionManagementSystem.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace BCCVehicleRequisitionManagementSystem.Controllers
 {
@@ -20,6 +22,24 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         {
             var employees = db.Employees.Include(e => e.Department).Include(e => e.EmployeeDesignation);
             return View(employees.ToList());
+        }
+
+        // GET: EmployeeProfile
+        public ActionResult EmployeeProfile()
+        {
+            EmployeeProfileViewModel model =new EmployeeProfileViewModel();
+            var userId = User.Identity.GetUserId();
+            var employees = db.Employees.Where(c => c.UserId == userId).Include(c => c.EmployeeDesignation).Include(c => c.Department);
+            foreach (var emp in employees)
+            {
+                model.Id = emp.Id;
+                model.Name = emp.Name;
+                model.ContactNo = emp.ContactNo;
+                model.Address = emp.Address;
+                model.EmployeeDesignation = emp.EmployeeDesignation;
+                model.Department = emp.Department;
+            }
+            return View(model);
         }
 
         // GET: Employees/Details/5
