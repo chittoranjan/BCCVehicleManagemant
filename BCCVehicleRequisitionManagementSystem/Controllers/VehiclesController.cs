@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using BCCVehicleRequisitionManagementSystem.Models.DatabaseContext;
 using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
 using BCCVehicleRequisitionManagementSystem.ViewModels;
@@ -21,8 +22,9 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         // GET: Vehicles
         public ActionResult Index()
         {
-            
-            return View(_vehicleManager.GetAll());
+            List<Vehicle> vehicles = _vehicleManager.GetAll();
+            List<VehicleViewModel> vehicleList = Mapper.Map<List<VehicleViewModel>>(vehicles);
+            return View(vehicleList);
         }
 
         // GET: Vehicles/Details/5
@@ -37,11 +39,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             {
                 return HttpNotFound();
             }
-            VehicleViewModel vehicleVm=new VehicleViewModel();
-            vehicleVm.Name = vehicle.Name;
-            vehicleVm.RegistrationNo = vehicle.RegistrationNo;
-            vehicleVm.VehicleTypeId = vehicle.VehicleTypeId;
-            vehicleVm.Description = vehicle.Description;
+            VehicleViewModel vehicleVm = Mapper.Map<VehicleViewModel>(vehicle);
 
             return View(vehicleVm);
         }
@@ -62,16 +60,14 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                Vehicle vehicle=new Vehicle();
-                vehicle.Name = vehicleVm.Name;
-                vehicle.RegistrationNo = vehicleVm.RegistrationNo;
-                vehicle.VehicleTypeId = vehicleVm.VehicleTypeId;
-                vehicle.Description = vehicleVm.Description;
+                Vehicle vehicle = Mapper.Map<Vehicle>(vehicleVm);
 
                 _vehicleManager.Add(vehicle);
+
+                TempData["Message"] = "Vehicle info save successfully!";
                 return RedirectToAction("Index");
             }
-
+            
             ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "TypeName", vehicleVm.VehicleTypeId);
             return View(vehicleVm);
         }
@@ -89,11 +85,8 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
                 return HttpNotFound();
             }
 
-            VehicleViewModel vehicleVm = new VehicleViewModel();
-            vehicleVm.Name = vehicle.Name;
-            vehicleVm.RegistrationNo = vehicle.RegistrationNo;
-            vehicleVm.VehicleTypeId = vehicle.VehicleTypeId;
-            vehicleVm.Description = vehicle.Description;
+            VehicleViewModel vehicleVm = Mapper.Map<VehicleViewModel>(vehicle);
+
 
             ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "TypeName", vehicleVm.VehicleTypeId);
             return View(vehicleVm);
@@ -104,19 +97,18 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,VehicleTypeId,RegistrationNo,Description")] VehicleViewModel vehicleVm)
+        public ActionResult Edit([Bind(Include = "Id,Name,VehicleTypeId,RegistrationNo,Description")] VehicleViewModel vehicleVm)
         {
             if (ModelState.IsValid)
             {
-                Vehicle vehicle = new Vehicle();
-                vehicle.Name = vehicleVm.Name;
-                vehicle.RegistrationNo = vehicleVm.RegistrationNo;
-                vehicle.VehicleTypeId = vehicleVm.VehicleTypeId;
-                vehicle.Description = vehicleVm.Description;
+                Vehicle vehicle = Mapper.Map<Vehicle>(vehicleVm);
 
                 _vehicleManager.Update(vehicle);
+
+                TempData["Message"] = "Vehicle info update successfully!";
                 return RedirectToAction("Index");
             }
+            
             ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "TypeName", vehicleVm.VehicleTypeId);
             return View(vehicleVm);
         }
@@ -133,12 +125,8 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             {
                 return HttpNotFound();
             }
-            VehicleViewModel vehicleVm = new VehicleViewModel();
-            vehicleVm.Id = vehicle.Id;
-            vehicleVm.Name = vehicle.Name;
-            vehicleVm.RegistrationNo = vehicle.RegistrationNo;
-            vehicleVm.VehicleTypeId = vehicle.VehicleTypeId;
-            vehicleVm.Description = vehicle.Description;
+            VehicleViewModel vehicleVm = Mapper.Map<VehicleViewModel>(vehicle);
+
 
             return View(vehicleVm);
         }
@@ -150,6 +138,8 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         {
             Vehicle vehicle = _vehicleManager.GetById(id);
             _vehicleManager.Remove(vehicle);
+
+            TempData["Message"] = "Vehicle info remove successfully!";
             return RedirectToAction("Index");
         }
 
