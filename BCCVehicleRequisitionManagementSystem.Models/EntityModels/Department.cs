@@ -9,11 +9,14 @@ namespace BCCVehicleRequisitionManagementSystem.Models.EntityModels
 {
     public class Department
     {
+        [Key]
         public int Id { get; set; }
 
-        [Required]
-        [Display(Name = "Department Name")]
+        [Required,MaxLength(250)]
         public string Name { get; set; }
+
+        public bool IsDeleted { get; set; }
+
         public List<EmployeeDesignation> EmployeeDesignations { get; set; }
         public List<Employee> Employees { get; set; }
     }

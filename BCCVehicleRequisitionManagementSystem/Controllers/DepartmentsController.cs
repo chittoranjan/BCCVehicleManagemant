@@ -6,19 +6,25 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using BCCVehicleRequisitionManagementSystem.Models.DatabaseContext;
 using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
+using BCCVehicleRequisitionManagementSystem.Models.Migrations;
+using BCCVehicleRequisitionManagementSystem.ViewModels;
+using BLL;
 
 namespace BCCVehicleRequisitionManagementSystem.Controllers
 {
     public class DepartmentsController : Controller
     {
-        private VehicleDbContext db = new VehicleDbContext();
+        readonly DepartmentManager _departmentManager=new DepartmentManager();
 
         // GET: Departments
         public ActionResult Index()
         {
-            return View(db.Departments.ToList());
+            List<Department> department = _departmentManager.GetAll();
+            List<DepartmentViewModel> departmentViewModels = Mapper.Map<List<DepartmentViewModel>>(department);
+            return View(departmentViewModels);
         }
 
         // GET: Departments/Details/5
@@ -28,12 +34,13 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Department department = db.Departments.Find(id);
+            Department department = _departmentManager.GetById((int)id);
             if (department == null)
             {
                 return HttpNotFound();
             }
-            return View(department);
+            DepartmentViewModel departmentViewModel = Mapper.Map<DepartmentViewModel>(department);
+            return View(departmentViewModel);
         }
 
         // GET: Departments/Create
@@ -47,16 +54,18 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Department department)
+        public ActionResult Create([Bind(Include = "Id,Name")] DepartmentViewModel departmentViewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Departments.Add(department);
-                db.SaveChanges();
+                Department department = Mapper.Map<Department>(departmentViewModel);
+                _departmentManager.Add(department);
+
+                TempData["Message"] = "Department is save successfully!";
                 return RedirectToAction("Index");
             }
 
-            return View(department);
+            return View(departmentViewModel);
         }
 
         // GET: Departments/Edit/5
@@ -66,12 +75,13 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Department department = db.Departments.Find(id);
+            Department department = _departmentManager.GetById((int)id);
             if (department == null)
             {
                 return HttpNotFound();
             }
-            return View(department);
+            DepartmentViewModel departmentViewModel = Mapper.Map<DepartmentViewModel>(department);
+            return View(departmentViewModel);
         }
 
         // POST: Departments/Edit/5
@@ -79,15 +89,17 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] Department department)
+        public ActionResult Edit([Bind(Include = "Id,Name")] DepartmentViewModel departmentViewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(department).State = EntityState.Modified;
-                db.SaveChanges();
+                Department department = Mapper.Map<Department>(departmentViewModel);
+                _departmentManager.Update(department);
+
+                TempData["Message"] = "Department is update successfully!";
                 return RedirectToAction("Index");
             }
-            return View(department);
+            return View(departmentViewModel);
         }
 
         // GET: Departments/Delete/5
@@ -97,12 +109,13 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Department department = db.Departments.Find(id);
+            Department department = _departmentManager.GetById((int)id);
             if (department == null)
             {
                 return HttpNotFound();
             }
-            return View(department);
+            DepartmentViewModel departmentViewModel = Mapper.Map<DepartmentViewModel>(department);
+            return View(departmentViewModel);
         }
 
         // POST: Departments/Delete/5
@@ -110,9 +123,10 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Department department = db.Departments.Find(id);
-            db.Departments.Remove(department);
-            db.SaveChanges();
+            Department department = _departmentManager.GetById(id);
+            _departmentManager.Remove(department);
+
+            TempData["Message"] = "Department remove successfully!";
             return RedirectToAction("Index");
         }
 
@@ -120,7 +134,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _departmentManager.Dispose();
             }
             base.Dispose(disposing);
         }
