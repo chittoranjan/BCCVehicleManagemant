@@ -27,13 +27,13 @@ namespace Repository
 
         public bool Remove(Vehicle vehicle)
         {
-            vehicle.IsDelete = true;
+            vehicle.IsDeleted = true;
             return Update(vehicle);
         }
 
         public List<Vehicle> GetAll(bool withDeleted = false)
         {
-            return db.Vehicles.Where(c => c.IsDelete == withDeleted).ToList();
+            return db.Vehicles.Where(c => c.IsDeleted == withDeleted).ToList();
         }
 
         public Vehicle GetById(int id)

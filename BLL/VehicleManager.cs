@@ -53,7 +53,7 @@ namespace BLL
             {
                 throw new Exception("Removable Vehicle is not selected!");
             }
-            vehicle.IsDelete = true;
+            vehicle.IsDeleted = true;
             return _repository.Remove(vehicle);
         }
 

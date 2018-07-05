@@ -209,6 +209,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\EmployeeProfileViewModel.cs" />
+    <Compile Include="ViewModels\VehicleTypeViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

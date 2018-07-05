@@ -17,7 +17,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
     public class VehiclesController : Controller
     {
         readonly VehicleManager _vehicleManager=new VehicleManager();
-        VehicleDbContext db=new VehicleDbContext();
+        readonly VehicleTypeManager _vehicleTypeManager=new VehicleTypeManager();
 
         // GET: Vehicles
         public ActionResult Index()
@@ -47,7 +47,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         // GET: Vehicles/Create
         public ActionResult Create()
         {
-            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "TypeName");
+            ViewBag.VehicleTypeId = new SelectList(_vehicleTypeManager.GetAll(), "Id", "TypeName");
             return View();
         }
 
@@ -68,7 +68,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
                 return RedirectToAction("Index");
             }
             
-            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "TypeName", vehicleVm.VehicleTypeId);
+            ViewBag.VehicleTypeId = new SelectList(_vehicleTypeManager.GetAll(), "Id", "TypeName", vehicleVm.VehicleTypeId);
             return View(vehicleVm);
         }
 
@@ -88,7 +88,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             VehicleViewModel vehicleVm = Mapper.Map<VehicleViewModel>(vehicle);
 
 
-            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "TypeName", vehicleVm.VehicleTypeId);
+            ViewBag.VehicleTypeId = new SelectList(_vehicleTypeManager.GetAll(), "Id", "TypeName", vehicleVm.VehicleTypeId);
             return View(vehicleVm);
         }
 
@@ -109,7 +109,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
                 return RedirectToAction("Index");
             }
             
-            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "TypeName", vehicleVm.VehicleTypeId);
+            ViewBag.VehicleTypeId = new SelectList(_vehicleTypeManager.GetAll(), "Id", "TypeName", vehicleVm.VehicleTypeId);
             return View(vehicleVm);
         }
 
@@ -147,7 +147,6 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
                 _vehicleManager.Dispose();
             }
             base.Dispose(disposing);

@@ -13,14 +13,11 @@ namespace BCCVehicleRequisitionManagementSystem.Models.EntityModels
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        [Display(Name = "Vehicle Type")]
-        [MaxLength(250)]
+        [Required, MaxLength(250)]
         public string TypeName { get; set; }
 
         public string Description { get; set; }
-
-        public List<Vehicle> Vehicles { get; set; }
+        public bool IsDeleted { get; set; }
 
     }
 }

@@ -7,20 +7,19 @@ namespace BCCVehicleRequisitionManagementSystem.Models.EntityModels
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Please input vehicle name!")]
+        [Required]
         [StringLength(250)]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Select vehicle type")]
+        [Required]
         public int VehicleTypeId { get; set; }
         public VehicleType VehicleType { get; set; }
 
-        [Required(ErrorMessage = "Length 4 to 6 digit")]
-        [MinLength(4),MaxLength(6)]
+        [Required, MinLength(4), MaxLength(6)]
         public string RegistrationNo { get; set; }
 
         public string Description { get; set; }
 
-        public bool IsDelete { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

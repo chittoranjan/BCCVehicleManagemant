@@ -78,6 +78,10 @@
     <Compile Include="Migrations\201807020707308_Employeemodel_change_with_registration.Designer.cs">
       <DependentUpon>201807020707308_Employeemodel_change_with_registration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807051242086_isDeleted_added_in_VehicleType.cs" />
+    <Compile Include="Migrations\201807051242086_isDeleted_added_in_VehicleType.Designer.cs">
+      <DependentUpon>201807051242086_isDeleted_added_in_VehicleType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
@@ -120,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807020707308_Employeemodel_change_with_registration.resx">
       <DependentUpon>201807020707308_Employeemodel_change_with_registration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807051242086_isDeleted_added_in_VehicleType.resx">
+      <DependentUpon>201807051242086_isDeleted_added_in_VehicleType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
