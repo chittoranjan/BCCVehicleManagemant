@@ -6,20 +6,25 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using BCCVehicleRequisitionManagementSystem.Models;
 using BCCVehicleRequisitionManagementSystem.Models.DatabaseContext;
 using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
+using BCCVehicleRequisitionManagementSystem.ViewModels;
+using BLL;
 
 namespace BCCVehicleRequisitionManagementSystem.Controllers
 {
     public class DriversController : Controller
     {
-        private VehicleDbContext db = new VehicleDbContext();
+         readonly DriverManager _driverManager=new DriverManager();
 
         // GET: Drivers
         public ActionResult Index()
         {
-            return View(db.Drivers.ToList());
+            List<Driver> driver = _driverManager.GetAll();
+            List<DriverViewModel> driverViewModel = Mapper.Map<List<DriverViewModel>>(driver);
+            return View(driverViewModel);
         }
 
         // GET: Drivers/Details/5
@@ -29,12 +34,13 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Driver driver = db.Drivers.Find(id);
+            Driver driver = _driverManager.GetById((int)id);
             if (driver == null)
             {
                 return HttpNotFound();
             }
-            return View(driver);
+            DriverViewModel driverViewModel = Mapper.Map<DriverViewModel>(driver);
+            return View(driverViewModel);
         }
 
         // GET: Drivers/Create
@@ -48,16 +54,18 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,MobileNo,LicenceNo,NID,Address,IsDelete")] Driver driver)
+        public ActionResult Create([Bind(Include = "Id,Name,MobileNo,LicenceNo,NID,Address")] DriverViewModel driverViewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Drivers.Add(driver);
-                db.SaveChanges();
+                Driver driver = Mapper.Map<Driver>(driverViewModel);
+                _driverManager.Add(driver);
+
+                TempData["Message"] = "Driver info is save successfully!";
                 return RedirectToAction("Index");
             }
 
-            return View(driver);
+            return View(driverViewModel);
         }
 
         // GET: Drivers/Edit/5
@@ -67,12 +75,13 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Driver driver = db.Drivers.Find(id);
+            Driver driver = _driverManager.GetById((int)id);
             if (driver == null)
             {
                 return HttpNotFound();
             }
-            return View(driver);
+            DriverViewModel driverViewModel = Mapper.Map<DriverViewModel>(driver);
+            return View(driverViewModel);
         }
 
         // POST: Drivers/Edit/5
@@ -80,15 +89,16 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,LicenceNo,NID,Address,IsDelete")] Driver driver)
+        public ActionResult Edit([Bind(Include = "Id,Name,MobileNo,LicenceNo,NID,Address")] DriverViewModel driverViewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(driver).State = EntityState.Modified;
-                db.SaveChanges();
+                Driver driver = Mapper.Map<Driver>(driverViewModel);
+                _driverManager.Update(driver);
+                TempData["Message"] = "Driver update successfully!";
                 return RedirectToAction("Index");
             }
-            return View(driver);
+            return View(driverViewModel);
         }
 
         // GET: Drivers/Delete/5
@@ -98,12 +108,13 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Driver driver = db.Drivers.Find(id);
+            Driver driver = _driverManager.GetById((int)id);
             if (driver == null)
             {
                 return HttpNotFound();
             }
-            return View(driver);
+            DriverViewModel driverViewModel = Mapper.Map<DriverViewModel>(driver);
+            return View(driverViewModel);
         }
 
         // POST: Drivers/Delete/5
@@ -111,9 +122,9 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Driver driver = db.Drivers.Find(id);
-            db.Drivers.Remove(driver);
-            db.SaveChanges();
+            Driver driver = _driverManager.GetById(id);
+            _driverManager.Remove(driver);
+            TempData["Message"] = "Driver remove successfully!";
             return RedirectToAction("Index");
         }
 
@@ -121,7 +132,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _driverManager.Dispose();
             }
             base.Dispose(disposing);
         }

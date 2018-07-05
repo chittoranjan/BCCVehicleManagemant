@@ -28,6 +28,9 @@ namespace BCCVehicleRequisitionManagementSystem
 
                 cfg.CreateMap<VehicleTypeViewModel, VehicleType>();
                 cfg.CreateMap<VehicleType, VehicleTypeViewModel>();
+
+                cfg.CreateMap<DriverViewModel, Driver>();
+                cfg.CreateMap<Driver, DriverViewModel>();
             });
         }
     }

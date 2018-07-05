@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BCCVehicleRequisitionManagementSystem.Models.EntityModels.Driver>
+﻿@model IEnumerable<BCCVehicleRequisitionManagementSystem.ViewModels.DriverViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -6,7 +6,12 @@
 }
 
 <h2>Driver List</h2>
-
+@if (TempData["Message"]!=null)
+{
+    <div class="alert alert-danger">
+        @TempData["Message"]
+    </div>
+}
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
