@@ -6,41 +6,49 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using BCCVehicleRequisitionManagementSystem.Models.DatabaseContext;
 using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
+using BCCVehicleRequisitionManagementSystem.ViewModels;
+using BLL;
 
 namespace BCCVehicleRequisitionManagementSystem.Controllers
 {
     public class EmployeeDesignationsController : Controller
     {
-        private VehicleDbContext db = new VehicleDbContext();
+        readonly EmployeeDesignationManager _employeeDesignationManager=new EmployeeDesignationManager();  
+        readonly DepartmentManager _departmentManager=new DepartmentManager();
 
         // GET: EmployeeDesignations
         public ActionResult Index()
         {
-            var employeeDesignations = db.EmployeeDesignations.Include(e => e.Department);
-            return View(employeeDesignations.ToList());
+            IEnumerable<EmployeeDesignation> employeeDesignation = _employeeDesignationManager.GetAll();
+            IEnumerable<EmployeeDesignationViewModel> employeeDesignationViewModel =
+                Mapper.Map<IEnumerable<EmployeeDesignationViewModel>>(employeeDesignation);
+            return View(employeeDesignationViewModel);
         }
 
         // GET: EmployeeDesignations/Details/5
-        public ActionResult Details(byte? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EmployeeDesignation employeeDesignation = db.EmployeeDesignations.Find(id);
+            EmployeeDesignation employeeDesignation = _employeeDesignationManager.GetById((int)id);
             if (employeeDesignation == null)
             {
                 return HttpNotFound();
             }
-            return View(employeeDesignation);
+            EmployeeDesignationViewModel employeeDesignationViewModel =
+                Mapper.Map<EmployeeDesignationViewModel>(employeeDesignation);
+            return View(employeeDesignationViewModel);
         }
 
         // GET: EmployeeDesignations/Create
         public ActionResult Create()
         {
-            ViewBag.DepartmentId = new SelectList(db.Departments, "Id", "Name");
+            ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name");
             return View();
         }
 
@@ -49,33 +57,37 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Designation,DepartmentId")] EmployeeDesignation employeeDesignation)
+        public ActionResult Create([Bind(Include = "Id,Designation,DepartmentId")] EmployeeDesignationViewModel employeeDesignationVmViewModel)
         {
             if (ModelState.IsValid)
             {
-                db.EmployeeDesignations.Add(employeeDesignation);
-                db.SaveChanges();
+                EmployeeDesignation employeeDesignation = Mapper.Map<EmployeeDesignation>(employeeDesignationVmViewModel);
+                _employeeDesignationManager.Add(employeeDesignation);
+
+                TempData["Message"] = "Designation save successfully!";
                 return RedirectToAction("Index");
             }
 
-            ViewBag.DepartmentId = new SelectList(db.Departments, "Id", "Name", employeeDesignation.DepartmentId);
-            return View(employeeDesignation);
+            ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Designation");
+            return View(employeeDesignationVmViewModel);
         }
 
         // GET: EmployeeDesignations/Edit/5
-        public ActionResult Edit(byte? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EmployeeDesignation employeeDesignation = db.EmployeeDesignations.Find(id);
+            EmployeeDesignation employeeDesignation = _employeeDesignationManager.GetById((int)id);
             if (employeeDesignation == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.DepartmentId = new SelectList(db.Departments, "Id", "Name", employeeDesignation.DepartmentId);
-            return View(employeeDesignation);
+            EmployeeDesignationViewModel employeeDesignationViewModel =
+                Mapper.Map<EmployeeDesignationViewModel>(employeeDesignation);
+            ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeDesignationViewModel.DepartmentId);
+            return View(employeeDesignationViewModel);
         }
 
         // POST: EmployeeDesignations/Edit/5
@@ -83,41 +95,47 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Designation,DepartmentId")] EmployeeDesignation employeeDesignation)
+        public ActionResult Edit([Bind(Include = "Id,Designation,DepartmentId")] EmployeeDesignationViewModel employeeDesignationVm)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(employeeDesignation).State = EntityState.Modified;
-                db.SaveChanges();
+                EmployeeDesignation employeeDesignation = Mapper.Map<EmployeeDesignation>(employeeDesignationVm);
+                _employeeDesignationManager.Update(employeeDesignation);
+
+                TempData["Message"] = "Designation update successfully!";
                 return RedirectToAction("Index");
             }
-            ViewBag.DepartmentId = new SelectList(db.Departments, "Id", "Name", employeeDesignation.DepartmentId);
-            return View(employeeDesignation);
+            ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name",employeeDesignationVm.DepartmentId);
+            return View(employeeDesignationVm);
         }
 
         // GET: EmployeeDesignations/Delete/5
-        public ActionResult Delete(byte? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EmployeeDesignation employeeDesignation = db.EmployeeDesignations.Find(id);
+            EmployeeDesignation employeeDesignation = _employeeDesignationManager.GetById((int) id);
             if (employeeDesignation == null)
             {
                 return HttpNotFound();
             }
-            return View(employeeDesignation);
+
+            EmployeeDesignationViewModel employeeDesignationViewModel =
+                Mapper.Map<EmployeeDesignationViewModel>(employeeDesignation);
+            return View(employeeDesignationViewModel);
         }
 
         // POST: EmployeeDesignations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(byte id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            EmployeeDesignation employeeDesignation = db.EmployeeDesignations.Find(id);
-            db.EmployeeDesignations.Remove(employeeDesignation);
-            db.SaveChanges();
+            EmployeeDesignation employeeDesignation = _employeeDesignationManager.GetById(id);
+            _employeeDesignationManager.Remove(employeeDesignation);
+
+            TempData["Message"] = "Designation remove successfully!";
             return RedirectToAction("Index");
         }
 
@@ -125,7 +143,8 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _employeeDesignationManager.Dispose();
+                _departmentManager.Dispose();
             }
             base.Dispose(disposing);
         }

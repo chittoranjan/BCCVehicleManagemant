@@ -210,6 +210,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\DepartmentViewModel.cs" />
     <Compile Include="ViewModels\DriverViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeDesignationViewModel.cs" />
     <Compile Include="ViewModels\EmployeeProfileViewModel.cs" />
     <Compile Include="ViewModels\VehicleTypeViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModel.cs" />

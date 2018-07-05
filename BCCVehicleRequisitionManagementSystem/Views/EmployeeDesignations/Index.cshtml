@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BCCVehicleRequisitionManagementSystem.Models.EntityModels.EmployeeDesignation>
+﻿@model IEnumerable<BCCVehicleRequisitionManagementSystem.ViewModels.EmployeeDesignationViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -7,6 +7,12 @@
 
 <h2>Designation List</h2>
 
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Message"]
+    </div>
+}
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Migrations.Model;
 
 namespace BCCVehicleRequisitionManagementSystem.Models.EntityModels
@@ -9,15 +10,13 @@ namespace BCCVehicleRequisitionManagementSystem.Models.EntityModels
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Please input employee designation!")]
-        [Display(Name = "Employee Designation")]
-        [StringLength(250)]
+        [Required, StringLength(250)]
         public string Designation { get; set; }
 
-        [Required(ErrorMessage = "Please select department!")]
-        [Display(Name = "Department Name")]
+        [ForeignKey("Department")]
         public int DepartmentId { get; set; }
         public Department Department { get; set; }
+        public bool IsDeleted { get; set; } 
 
     }
 }
