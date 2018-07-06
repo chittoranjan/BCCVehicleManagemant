@@ -59,9 +59,15 @@ namespace BLL
             return _repository.GetById(id);
         }
 
+        public List<EmployeeDesignation> GetByDepartmentId(int departmentId)
+        {
+            return _repository.GetByDepartmentId(departmentId);
+        }
         public void Dispose()
         {
             _repository.Dispose();
         }
+
+        
     }
 }

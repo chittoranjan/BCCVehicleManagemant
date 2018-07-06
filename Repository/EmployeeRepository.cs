@@ -43,7 +43,7 @@ namespace Repository
 
         public Employee GetByUserId(string userId)
         {
-            return db.Employees.Include(c => c.EmployeeDesignation).Include(c => c.Department).FirstOrDefault(c => c.UserId == userId);
+            return db.Employees.Where(c=>c.IsDeleted==false).Include(c => c.EmployeeDesignation).Include(c => c.Department).FirstOrDefault(c => c.UserId == userId);
         }
         public void Dispose()
         {

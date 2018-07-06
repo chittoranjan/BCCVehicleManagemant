@@ -139,6 +139,18 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             return RedirectToAction("Index");
         }
 
+        //JSON data call for dropdown....
+        public JsonResult GetByDepartment(int? departmentId)
+        {
+            if (departmentId == null)
+            {
+                return null;
+            }
+
+            var designation =_employeeDesignationManager.GetByDepartmentId((int)departmentId);
+            return Json(designation, JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

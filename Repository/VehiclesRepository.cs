@@ -33,12 +33,12 @@ namespace Repository
 
         public List<Vehicle> GetAll(bool withDeleted = false)
         {
-            return db.Vehicles.Where(c => c.IsDeleted == withDeleted).ToList();
+            return db.Vehicles.Where(c => c.IsDeleted == withDeleted).Include(c=>c.VehicleType).ToList();
         }
 
         public Vehicle GetById(int id)
         {
-            return db.Vehicles.FirstOrDefault(c => c.Id == id);
+            return db.Vehicles.Include(c=>c.VehicleType).FirstOrDefault(c => c.Id == id);
         }
 
         public void Dispose()

@@ -10,21 +10,6 @@
 <div>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Department.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Department.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EmployeeDesignation.Designation)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EmployeeDesignation.Designation)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Name)
@@ -32,6 +17,22 @@
 
         <dd>
             @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartmentId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Department.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeDesignationId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeDesignation.Designation)
         </dd>
 
         <dt>
@@ -53,6 +54,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id },htmlAttributes:new {@class="btn btn-default"}) &nbsp;
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-info" })
 </p>

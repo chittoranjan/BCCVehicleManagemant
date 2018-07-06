@@ -41,6 +41,10 @@ namespace Repository
             return db.EmployeeDesignations.Include(c=>c.Department).FirstOrDefault(c => c.Id == id);
         }
 
+        public List<EmployeeDesignation> GetByDepartmentId(int id)
+        {
+            return db.EmployeeDesignations.Where(c => c.DepartmentId == id).ToList();
+        }
         public void Dispose()
         {
             db.Dispose();
