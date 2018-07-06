@@ -1,14 +1,13 @@
-﻿@model BCCVehicleRequisitionManagementSystem.Models.EntityModels.Employee
+﻿@model BCCVehicleRequisitionManagementSystem.ViewModels.EmployeeViewModel
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Employee Details</h2>
 
 <div>
-    <h4>Employee</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -49,22 +48,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDelete)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsDelete)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserId)
         </dd>
 
     </dl>

@@ -1,60 +1,66 @@
-﻿@model BCCVehicleRequisitionManagementSystem.ViewModels.EmployeeProfileViewModel
+﻿@using System.Web.Mvc.Html
+@model BCCVehicleRequisitionManagementSystem.ViewModels.EmployeeProfileViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div>
-    <h4>Employee Details</h4>
-    <hr/>
+<h2>Employee Profile</h2>
 
-    <dl class="dl-horizontal">
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Message"]
+    </div>
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    <div class="form-horizontal">
+        <hr/>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DepartmentId)
-        </dt>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Department.Name)
-        </dd>
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmployeeDesignationId, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmployeeDesignation.Designation, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.DepartmentId, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Department.Name, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EmployeeDesignationId)
-        </dt>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ContactNo, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ContactNo, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.EmployeeDesignation.Designation)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ContactNo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ContactNo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-    </dl>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
+            </div>
+        </div>
+    </div>
     
+}
+<div class="col-md-offset-2">
+    @Html.ActionLink("Edit profile information", "EmployeeProfileEdit", new { id = Model.Id })
 </div>
 
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,12 +1,18 @@
-﻿@model IEnumerable<BCCVehicleRequisitionManagementSystem.Models.EntityModels.Employee>
+﻿@model IEnumerable<BCCVehicleRequisitionManagementSystem.ViewModels.EmployeeViewModel>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Employee List</h2>
 
+@if (TempData["Message"]!=null)
+{
+    <div class="alert alert-danger">
+        @TempData["Message"]
+    </div>
+}
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -27,12 +33,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Address)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsDelete)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserId)
-        </th>
         <th></th>
     </tr>
 
@@ -52,12 +52,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsDelete)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserId)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

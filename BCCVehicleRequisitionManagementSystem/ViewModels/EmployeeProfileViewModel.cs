@@ -8,7 +8,7 @@ namespace BCCVehicleRequisitionManagementSystem.ViewModels
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Please input employee name!")]
-        [Display(Name = "Employee Name")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Please select employee designation!")]

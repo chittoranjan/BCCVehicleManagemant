@@ -210,6 +210,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\DepartmentViewModel.cs" />
     <Compile Include="ViewModels\DriverViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeViewModel.cs" />
     <Compile Include="ViewModels\EmployeeDesignationViewModel.cs" />
     <Compile Include="ViewModels\EmployeeProfileViewModel.cs" />
     <Compile Include="ViewModels\VehicleTypeViewModel.cs" />
@@ -406,7 +407,9 @@
     <Content Include="Views\Employees\Details.cshtml" />
     <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\Employees\EmployeeProfileEdit.cshtml" />
     <Content Include="Views\Employees\EmployeeProfile.cshtml" />
+    <Content Include="Views\Employees\EmployeeProfileDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
