@@ -5,12 +5,14 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BCCVehicleRequisitionManagementSystem.Models;
 using BCCVehicleRequisitionManagementSystem.Models.DatabaseContext;
 using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
+using BLL;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BCCVehicleRequisitionManagementSystem.Controllers
@@ -21,6 +23,8 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        readonly EmployeeManager _employeeManager = new EmployeeManager();
+        readonly DepartmentManager _departmentManager = new DepartmentManager();
         public AccountController()
         {
         }
@@ -141,11 +145,14 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
-        {      
-            VehicleDbContext db=new VehicleDbContext();
-                 
-            ViewData["EmployeeRegistration.EmployeeDesignationId"] =new SelectList(db.EmployeeDesignations,"Id", "Designation"); 
-            ViewData["EmployeeRegistration.DepartmentId"] =new SelectList(db.Departments,"Id","Name");
+        {
+            //VehicleDbContext db=new VehicleDbContext();
+
+            //ViewData["EmployeeRegistration.EmployeeDesignationId"] =new SelectList(db.EmployeeDesignations,"Id", "Designation"); 
+            //ViewData["EmployeeRegistration.DepartmentId"] =new SelectList(db.Departments,"Id","Name");
+
+            ViewData["EmployeeRegistration.DepartmentId"] = new SelectList(_departmentManager.GetAll(), "Id", "Name");
+            ViewData["EmployeeRegistration.EmployeeDesignationId"] = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Designation" } }, "Value", "Text");
 
             return View();         
         }
@@ -165,7 +172,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
                 role.RoleId = "3998b1cd-2645-4a04-a3ab-cc41a9269671";
                 user.Roles.Add(role);
 
-                Employee employee=new Employee();
+                Employee employee = new Employee();
                 employee.Name = model.EmployeeRegistration.Name;
                 employee.EmployeeDesignationId = model.EmployeeRegistration.EmployeeDesignationId;
                 employee.DepartmentId = model.EmployeeRegistration.DepartmentId;
@@ -173,13 +180,16 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
                 employee.ContactNo = model.EmployeeRegistration.ContactNo;
                 employee.UserId = user.Id;
 
-                var empCount = 0;
-                using (var db=new VehicleDbContext())
-                {
-                    db.Employees.Add(employee);
-                    empCount=db.SaveChanges();
-                }
-                if (empCount>0)
+                //var empCount = 0;
+                //using (var db = new VehicleDbContext())
+                //{
+                //    db.Employees.Add(employee);
+                //    empCount = db.SaveChanges();
+                //}
+                //Employee employee = Mapper.Map<Employee>(model);
+                //employee.UserId = user.Id;
+                var empCount =_employeeManager.Add(employee);
+                if (empCount)
                 {
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
@@ -449,7 +459,8 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
                     _signInManager = null;
                 }
             }
-
+            _employeeManager.Dispose();
+            _departmentManager.Dispose();
             base.Dispose(disposing);
         }
 

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using AutoMapper;
+using BCCVehicleRequisitionManagementSystem.Models;
 using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
 using BCCVehicleRequisitionManagementSystem.ViewModels;
 
@@ -42,6 +43,8 @@ namespace BCCVehicleRequisitionManagementSystem
                 cfg.CreateMap<Employee, EmployeeViewModel>();
                 cfg.CreateMap<EmployeeProfileViewModel, Employee>();
                 cfg.CreateMap<Employee, EmployeeProfileViewModel>();
+                cfg.CreateMap<Employee, RegisterViewModel>();
+                cfg.CreateMap<RegisterViewModel, Employee>();
             });
         }
     }

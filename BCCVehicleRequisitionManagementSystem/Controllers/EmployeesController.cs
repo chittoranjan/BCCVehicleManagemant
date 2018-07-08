@@ -18,7 +18,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
     public class EmployeesController : Controller
     {
         readonly EmployeeManager _employeeManager=new EmployeeManager();
-        readonly DepartmentManager _departmentManager=new DepartmentManager();
+        readonly DepartmentManager _departmentManager = new DepartmentManager();
         readonly EmployeeDesignationManager _employeeDesignation=new EmployeeDesignationManager();
         // GET: Employees
         public ActionResult Index()
@@ -48,7 +48,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         public ActionResult Create()
         {
             ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name");
-            ViewBag.EmployeeDesignationId = new SelectList(_employeeDesignation.GetAll(), "Id", "Designation");
+            ViewBag.EmployeeDesignationId = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Designation" } }, "Value", "Text");
             return View();
         }
 
@@ -69,7 +69,8 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             }
 
             ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name");
-            ViewBag.EmployeeDesignationId = new SelectList(_employeeDesignation.GetAll(), "Id", "Designation");
+            //ViewBag.EmployeeDesignationId = new SelectList(_employeeDesignation.GetAll(), "Id", "Designation");
+            ViewBag.EmployeeDesignationId = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Designation" } }, "Value", "Text");
             return View(employeeVm);
         }
 
