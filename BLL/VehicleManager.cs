@@ -57,7 +57,7 @@ namespace BLL
             return _repository.Remove(vehicle);
         }
 
-        public List<Vehicle> GetAll(bool withDeleted = false)
+        public ICollection<Vehicle> GetAll(bool withDeleted = false)
         {
             return _repository.GetAll(withDeleted);
         }

@@ -22,8 +22,8 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         // GET: Drivers
         public ActionResult Index()
         {
-            List<Driver> driver = _driverManager.GetAll();
-            List<DriverViewModel> driverViewModel = Mapper.Map<List<DriverViewModel>>(driver);
+            ICollection<Driver> driver = _driverManager.GetAll();
+            IEnumerable<DriverViewModel> driverViewModel = Mapper.Map<IEnumerable<DriverViewModel>>(driver);
             return View(driverViewModel);
         }
 

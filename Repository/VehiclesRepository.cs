@@ -31,7 +31,7 @@ namespace Repository
             return Update(vehicle);
         }
 
-        public List<Vehicle> GetAll(bool withDeleted = false)
+        public ICollection<Vehicle> GetAll(bool withDeleted = false)
         {
             return db.Vehicles.Where(c => c.IsDeleted == withDeleted).Include(c=>c.VehicleType).ToList();
         }

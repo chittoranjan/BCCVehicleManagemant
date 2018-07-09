@@ -31,9 +31,9 @@ namespace Repository
             return Update(vehicleType);
         }
 
-        public List<VehicleType> GetAll(bool withDeleted = false)
+        public ICollection<VehicleType> GetAll(bool withDeleted = false)
         {
-            return db.VehicleTypes.Where(c => c.IsDeleted == withDeleted).ToList();
+            return db.VehicleTypes.Where(c => c.IsDeleted == withDeleted||c.IsDeleted==withDeleted).ToList();
         }
 
         public VehicleType GetById(int id)

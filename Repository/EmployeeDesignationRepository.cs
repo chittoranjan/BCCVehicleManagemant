@@ -31,7 +31,7 @@ namespace Repository
             return Update(employeeDesignation);
         }
 
-        public List<EmployeeDesignation> GetAll(bool withDeleted = false)
+        public ICollection<EmployeeDesignation> GetAll(bool withDeleted = false)
         {
             return db.EmployeeDesignations.Where(c => c.IsDeleted == withDeleted).Include(c=>c.Department).ToList();
         }
@@ -41,7 +41,7 @@ namespace Repository
             return db.EmployeeDesignations.Include(c=>c.Department).FirstOrDefault(c => c.Id == id);
         }
 
-        public List<EmployeeDesignation> GetByDepartmentId(int id)
+        public ICollection<EmployeeDesignation> GetByDepartmentId(int id)
         {
             return db.EmployeeDesignations.Where(c => c.DepartmentId == id).ToList();
         }

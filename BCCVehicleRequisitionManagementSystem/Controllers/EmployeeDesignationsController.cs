@@ -22,7 +22,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         // GET: EmployeeDesignations
         public ActionResult Index()
         {
-            IEnumerable<EmployeeDesignation> employeeDesignation = _employeeDesignationManager.GetAll();
+            ICollection<EmployeeDesignation> employeeDesignation = _employeeDesignationManager.GetAll();
             IEnumerable<EmployeeDesignationViewModel> employeeDesignationViewModel =
                 Mapper.Map<IEnumerable<EmployeeDesignationViewModel>>(employeeDesignation);
             return View(employeeDesignationViewModel);

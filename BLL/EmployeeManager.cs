@@ -73,7 +73,7 @@ namespace BLL
             return _repository.Remove(employee);
         }
 
-        public List<Employee> GetAll(bool withDeleted = false)
+        public ICollection<Employee> GetAll(bool withDeleted = false)
         {
             return _repository.GetAll(withDeleted);
         }

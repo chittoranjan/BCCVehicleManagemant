@@ -31,7 +31,7 @@ namespace Repository
             return Update(department);
         }
 
-        public List<Department> GetAll(bool withDeleted = false)
+        public ICollection<Department> GetAll(bool withDeleted = false)
         {
             return db.Departments.Where(c => c.IsDeleted == withDeleted).ToList();
         }

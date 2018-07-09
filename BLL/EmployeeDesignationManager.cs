@@ -49,7 +49,7 @@ namespace BLL
             return _repository.Remove(employeeDesignation);
         }
 
-        public List<EmployeeDesignation> GetAll(bool withDeleted = false)
+        public ICollection<EmployeeDesignation> GetAll(bool withDeleted = false)
         {
             return _repository.GetAll(withDeleted);
         }
@@ -59,7 +59,7 @@ namespace BLL
             return _repository.GetById(id);
         }
 
-        public List<EmployeeDesignation> GetByDepartmentId(int departmentId)
+        public ICollection<EmployeeDesignation> GetByDepartmentId(int departmentId)
         {
             return _repository.GetByDepartmentId(departmentId);
         }

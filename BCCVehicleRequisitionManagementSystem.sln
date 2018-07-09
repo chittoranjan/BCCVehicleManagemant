@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCCVehicleRequisitionManage
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCCVehicleRequisitionManagementSystem.Repository", "Repository\BCCVehicleRequisitionManagementSystem.Repository.csproj", "{B99CF6D9-06AB-4C6C-820F-DB4A54938E80}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCCVehicleRequisitionManagementSystem.Models.Contracts", "BCCVehicleRequisitionManagementSystem.Models.Contracts\BCCVehicleRequisitionManagementSystem.Models.Contracts.csproj", "{E97B5155-F41A-46BD-B99F-74781FC9D8AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,10 @@ Global
 		{B99CF6D9-06AB-4C6C-820F-DB4A54938E80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B99CF6D9-06AB-4C6C-820F-DB4A54938E80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B99CF6D9-06AB-4C6C-820F-DB4A54938E80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E97B5155-F41A-46BD-B99F-74781FC9D8AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E97B5155-F41A-46BD-B99F-74781FC9D8AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E97B5155-F41A-46BD-B99F-74781FC9D8AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E97B5155-F41A-46BD-B99F-74781FC9D8AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

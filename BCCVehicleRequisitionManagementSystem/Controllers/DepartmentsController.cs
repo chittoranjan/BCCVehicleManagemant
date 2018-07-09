@@ -22,8 +22,8 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         // GET: Departments
         public ActionResult Index()
         {
-            List<Department> department = _departmentManager.GetAll();
-            List<DepartmentViewModel> departmentViewModels = Mapper.Map<List<DepartmentViewModel>>(department);
+            ICollection<Department> department = _departmentManager.GetAll();
+            IEnumerable<DepartmentViewModel> departmentViewModels = Mapper.Map<List<DepartmentViewModel>>(department);
             return View(departmentViewModels);
         }
 

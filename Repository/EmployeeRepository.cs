@@ -31,7 +31,7 @@ namespace Repository
             return Update(employee);
         }
 
-        public List<Employee> GetAll(bool withDeleted = false)
+        public ICollection<Employee> GetAll(bool withDeleted = false)
         {
             return db.Employees.Where(c => c.IsDeleted == withDeleted).Include(c=>c.Department).Include(c=>c.EmployeeDesignation).ToList();
         }

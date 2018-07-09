@@ -73,7 +73,7 @@ namespace BLL
             return _repository.Remove(driver);
         }
 
-        public List<Driver> GetAll(bool withDeleted = false)
+        public ICollection<Driver> GetAll(bool withDeleted = false)
         {
             return _repository.GetAll(withDeleted);
         }

@@ -21,8 +21,8 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         // GET: VehicleTypes
         public ActionResult Index()
         {
-            List<VehicleType> vehicleType = _vehicleTypeManager.GetAll();
-            List<VehicleTypeViewModel> vehicleList = Mapper.Map<List<VehicleTypeViewModel>>(vehicleType);
+            ICollection<VehicleType> vehicleType = _vehicleTypeManager.GetAll();
+            IEnumerable<VehicleTypeViewModel> vehicleList = Mapper.Map<IEnumerable<VehicleTypeViewModel>>(vehicleType);
             return View(vehicleList);
         }
 

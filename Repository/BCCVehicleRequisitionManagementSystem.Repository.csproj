@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\Repository.cs" />
     <Compile Include="EmployeeRepository.cs" />
     <Compile Include="EmployeeDesignationRepository.cs" />
     <Compile Include="DepartmentRepository.cs" />
@@ -52,6 +53,10 @@
     <Compile Include="VehiclesRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BCCVehicleRequisitionManagementSystem.Models.Contracts\BCCVehicleRequisitionManagementSystem.Models.Contracts.csproj">
+      <Project>{E97B5155-F41A-46BD-B99F-74781FC9D8AE}</Project>
+      <Name>BCCVehicleRequisitionManagementSystem.Models.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BCCVehicleRequisitionManagementSystem.Models\BCCVehicleRequisitionManagementSystem.Models.csproj">
       <Project>{753f1ea6-7e45-4641-bfbc-b79abd88ed00}</Project>
       <Name>BCCVehicleRequisitionManagementSystem.Models</Name>

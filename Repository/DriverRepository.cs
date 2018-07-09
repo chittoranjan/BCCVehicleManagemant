@@ -31,7 +31,7 @@ namespace Repository
             return Update(driver);
         }
 
-        public List<Driver> GetAll(bool withDeleted = false)
+        public ICollection<Driver> GetAll(bool withDeleted = false)
         {
             return db.Drivers.Where(c => c.IsDeleted == withDeleted).ToList();
         }

@@ -41,7 +41,7 @@ namespace BLL
             return _repository.Remove(department);
         }
 
-        public List<Department> GetAll(bool withDeleted = false)
+        public ICollection<Department> GetAll(bool withDeleted = false)
         {
             return _repository.GetAll(withDeleted);
         }
