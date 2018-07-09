@@ -88,7 +88,11 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             }
             EmployeeViewModel employeeViewModel = Mapper.Map<EmployeeViewModel>(employee);
             ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeViewModel.DepartmentId);
-            ViewBag.EmployeeDesignationId = new SelectList(_employeeDesignation.GetAll(), "Id", "Designation", employeeViewModel.EmployeeDesignationId);
+            if(ViewBag.DepartmentId != null)
+            {
+                ViewBag.EmployeeDesignationId = new SelectList(_employeeDesignation.GetByDepartmentId(employeeViewModel.DepartmentId), "Id", "Designation", employeeViewModel.EmployeeDesignationId);
+            }
+            
             return View(employeeViewModel);
         }
 
@@ -108,7 +112,11 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeVm.DepartmentId);
-            ViewBag.EmployeeDesignationId = new SelectList(_employeeDesignation.GetAll(), "Id", "Designation", employeeVm.EmployeeDesignationId);
+            if (ViewBag.DepartmentId!=null)
+            {
+                ViewBag.EmployeeDesignationId = new SelectList(_employeeDesignation.GetByDepartmentId(employeeVm.DepartmentId), "Id", "Designation", employeeVm.EmployeeDesignationId);
+            }
+            
             return View(employeeVm);
         }
 
@@ -169,7 +177,11 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             }
             EmployeeProfileViewModel employeeProfileViewModel = Mapper.Map<EmployeeProfileViewModel>(employee);
             ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeProfileViewModel.DepartmentId);
-            ViewBag.EmployeeDesignationId = new SelectList(_employeeDesignation.GetAll(), "Id", "Designation", employeeProfileViewModel.EmployeeDesignationId);
+            if (ViewBag.DepartmentId!=null)
+            {
+                ViewBag.EmployeeDesignationId = new SelectList(_employeeDesignation.GetByDepartmentId(employeeProfileViewModel.DepartmentId), "Id", "Designation", employeeProfileViewModel.EmployeeDesignationId);
+            }
+            
             return View(employeeProfileViewModel);
         }
 
@@ -178,11 +190,11 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EmployeeProfileEdit([Bind(Include = "Id,Name,EmployeeDesignationId,DepartmentId,ContactNo,Address")] EmployeeProfileViewModel employeeProfileVm)
+        public ActionResult EmployeeProfileEdit([Bind(Include = "Id,Name,EmployeeDesignationId,DepartmentId,ContactNo,Address")] EmployeeProfileViewModel employeeProfileViewModel)
         {
             if (ModelState.IsValid)
             {
-                Employee employee = Mapper.Map<Employee>(employeeProfileVm);
+                Employee employee = Mapper.Map<Employee>(employeeProfileViewModel);
                 var userId = User.Identity.GetUserId();
                 employee.UserId = userId;
                 _employeeManager.Update(employee);
@@ -190,9 +202,12 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
                 TempData["Message"] = "Profile update successfully!";
                 return RedirectToAction("EmployeeProfile","Employees");
             }
-            ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeProfileVm.DepartmentId);
-            ViewBag.EmployeeDesignationId = new SelectList(_employeeDesignation.GetAll(), "Id", "Designation", employeeProfileVm.EmployeeDesignationId);
-            return View(employeeProfileVm);
+            ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeProfileViewModel.DepartmentId);
+            if (ViewBag.DepartmentId != null)
+            {
+                ViewBag.EmployeeDesignationId = new SelectList(_employeeDesignation.GetByDepartmentId(employeeProfileViewModel.DepartmentId), "Id", "Designation", employeeProfileViewModel.EmployeeDesignationId);
+            }
+            return View(employeeProfileViewModel);
         }
 
         // GET: Employees/ProfileDelete/5

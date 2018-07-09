@@ -172,13 +172,13 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
                 role.RoleId = "3998b1cd-2645-4a04-a3ab-cc41a9269671";
                 user.Roles.Add(role);
 
-                Employee employee = new Employee();
-                employee.Name = model.EmployeeRegistration.Name;
-                employee.EmployeeDesignationId = model.EmployeeRegistration.EmployeeDesignationId;
-                employee.DepartmentId = model.EmployeeRegistration.DepartmentId;
-                employee.Address = model.EmployeeRegistration.Address;
-                employee.ContactNo = model.EmployeeRegistration.ContactNo;
-                employee.UserId = user.Id;
+                //Employee employee = new Employee();
+                //employee.Name = model.EmployeeRegistration.Name;
+                //employee.EmployeeDesignationId = model.EmployeeRegistration.EmployeeDesignationId;
+                //employee.DepartmentId = model.EmployeeRegistration.DepartmentId;
+                //employee.Address = model.EmployeeRegistration.Address;
+                //employee.ContactNo = model.EmployeeRegistration.ContactNo;
+                //employee.UserId = user.Id;
 
                 //var empCount = 0;
                 //using (var db = new VehicleDbContext())
@@ -186,8 +186,8 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
                 //    db.Employees.Add(employee);
                 //    empCount = db.SaveChanges();
                 //}
-                //Employee employee = Mapper.Map<Employee>(model);
-                //employee.UserId = user.Id;
+                Employee employee = Mapper.Map<Employee>(model.EmployeeRegistration);
+                employee.UserId = user.Id;
                 var empCount =_employeeManager.Add(employee);
                 if (empCount)
                 {
