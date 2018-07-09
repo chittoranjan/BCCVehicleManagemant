@@ -69,7 +69,6 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             }
 
             ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name");
-            //ViewBag.EmployeeDesignationId = new SelectList(_employeeDesignation.GetAll(), "Id", "Designation");
             ViewBag.EmployeeDesignationId = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Designation" } }, "Value", "Text");
             return View(employeeVm);
         }
@@ -101,13 +100,15 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,EmployeeDesignationId,DepartmentId,ContactNo,Address")] EmployeeViewModel employeeVm) 
+        public ActionResult Edit([Bind(Include = "Id,Name,EmployeeDesignationId,DepartmentId,ContactNo,Address,UserId")] EmployeeViewModel employeeVm) 
         {
             if (ModelState.IsValid)
             {
                 Employee employee = Mapper.Map<Employee>(employeeVm);
+                //var userId = User.Identity.GetUserId();
+                //employee.UserId = userId;
                 _employeeManager.Update(employee);
-
+                 
                 TempData["Message"] = "Employee update successfully!";
                 return RedirectToAction("Index");
             }
@@ -176,6 +177,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
                 return HttpNotFound();
             }
             EmployeeProfileViewModel employeeProfileViewModel = Mapper.Map<EmployeeProfileViewModel>(employee);
+
             ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeProfileViewModel.DepartmentId);
             if (ViewBag.DepartmentId!=null)
             {

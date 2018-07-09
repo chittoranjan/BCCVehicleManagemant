@@ -146,11 +146,6 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            //VehicleDbContext db=new VehicleDbContext();
-
-            //ViewData["EmployeeRegistration.EmployeeDesignationId"] =new SelectList(db.EmployeeDesignations,"Id", "Designation"); 
-            //ViewData["EmployeeRegistration.DepartmentId"] =new SelectList(db.Departments,"Id","Name");
-
             ViewData["EmployeeRegistration.DepartmentId"] = new SelectList(_departmentManager.GetAll(), "Id", "Name");
             ViewData["EmployeeRegistration.EmployeeDesignationId"] = new SelectList(new[] { new SelectListItem() { Value = "", Text = "Select Designation" } }, "Value", "Text");
 
@@ -172,20 +167,6 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
                 role.RoleId = "3998b1cd-2645-4a04-a3ab-cc41a9269671";
                 user.Roles.Add(role);
 
-                //Employee employee = new Employee();
-                //employee.Name = model.EmployeeRegistration.Name;
-                //employee.EmployeeDesignationId = model.EmployeeRegistration.EmployeeDesignationId;
-                //employee.DepartmentId = model.EmployeeRegistration.DepartmentId;
-                //employee.Address = model.EmployeeRegistration.Address;
-                //employee.ContactNo = model.EmployeeRegistration.ContactNo;
-                //employee.UserId = user.Id;
-
-                //var empCount = 0;
-                //using (var db = new VehicleDbContext())
-                //{
-                //    db.Employees.Add(employee);
-                //    empCount = db.SaveChanges();
-                //}
                 Employee employee = Mapper.Map<Employee>(model.EmployeeRegistration);
                 employee.UserId = user.Id;
                 var empCount =_employeeManager.Add(employee);
