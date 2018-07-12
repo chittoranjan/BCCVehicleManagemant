@@ -157,6 +157,12 @@
       <DependentUpon>201807060752297_validation_added_in_Employee.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BCCVehicleRequisitionManagementSystem.Models.Contracts\BCCVehicleRequisitionManagementSystem.Models.Contracts.csproj">
+      <Project>{E97B5155-F41A-46BD-B99F-74781FC9D8AE}</Project>
+      <Name>BCCVehicleRequisitionManagementSystem.Models.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

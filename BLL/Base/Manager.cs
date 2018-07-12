@@ -8,33 +8,42 @@ using Repository.Base;
 
 namespace BLL.Base
 {
-    public abstract class Manager<T> where T:class
+    public abstract class Manager<T>:IDisposable where T:class
     {
-        private Repository<T> _repository;
+        protected Repository<T> Repository;
 
-        private Manager(Repository<T> repository )
+        protected Manager(Repository<T> repository )
         {
-            _repository = repository;
+            Repository = repository;
         }
 
         public virtual bool Add(T entity)
         {
-            return _repository.Add(entity);
+            return Repository.Add(entity);
         }
 
         public virtual bool Update(T entity)
         {
-            return _repository.Update(entity);
+            return Repository.Update(entity);
         }
 
         public virtual bool Remove(IDeletable entity)
         {
-            return _repository.Remove(entity);
+            return Repository.Remove(entity);
         }
 
         public virtual ICollection<T> GetAll(bool withDeleted = false)
         {
-            return _repository.GetAll(withDeleted);
+            return Repository.GetAll(withDeleted);
+        }
+
+        public virtual T GetById(int id)
+        {
+            return Repository.GetById(id); 
+        }
+        public void Dispose()
+        {
+            Repository?.Dispose();
         }
     }
 }

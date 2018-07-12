@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BCCVehicleRequisitionManagementSystem.Models.Contracts;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BCCVehicleRequisitionManagementSystem.Models.EntityModels
 {
-    public class VehicleType
+    public class VehicleType:IDeletable,IEntityModel
     {
         [Key]
         public int Id { get; set; }
@@ -18,6 +19,10 @@ namespace BCCVehicleRequisitionManagementSystem.Models.EntityModels
 
         public string Description { get; set; }
         public bool IsDeleted { get; set; }
-
+        public bool Delete()
+        {
+            IsDeleted = true;
+            return IsDeleted;
+        }
     }
 }

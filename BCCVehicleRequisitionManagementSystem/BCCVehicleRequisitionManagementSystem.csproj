@@ -424,6 +424,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BCCVehicleRequisitionManagementSystem.Models.Contracts\BCCVehicleRequisitionManagementSystem.Models.Contracts.csproj">
+      <Project>{E97B5155-F41A-46BD-B99F-74781FC9D8AE}</Project>
+      <Name>BCCVehicleRequisitionManagementSystem.Models.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BCCVehicleRequisitionManagementSystem.Models\BCCVehicleRequisitionManagementSystem.Models.csproj">
       <Project>{753f1ea6-7e45-4641-bfbc-b79abd88ed00}</Project>
       <Name>BCCVehicleRequisitionManagementSystem.Models</Name>
@@ -431,6 +435,10 @@
     <ProjectReference Include="..\BLL\BCCVehicleRequisitionManagementSystem.BLL.csproj">
       <Project>{d98bcb8c-137a-468b-b040-40c237678f8a}</Project>
       <Name>BCCVehicleRequisitionManagementSystem.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Repository\BCCVehicleRequisitionManagementSystem.Repository.csproj">
+      <Project>{b99cf6d9-06ab-4c6c-820f-db4a54938e80}</Project>
+      <Name>BCCVehicleRequisitionManagementSystem.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -6,22 +6,23 @@ using System.Text;
 using System.Threading.Tasks;
 using BCCVehicleRequisitionManagementSystem.Models.DatabaseContext;
 using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
+using Repository.Base;
 
 namespace Repository
 {
     public class VehiclesTypeRepository
     {
-        readonly VehicleDbContext db=new VehicleDbContext();
+        readonly VehicleDbContext db = new VehicleDbContext();
         public bool Add(VehicleType vehicleType)
         {
             db.VehicleTypes.Add(vehicleType);
-            return db.SaveChanges()>0;
+            return db.SaveChanges() > 0;
         }
 
         public bool Update(VehicleType vehicleType)
         {
             db.VehicleTypes.Attach(vehicleType);
-            db.Entry(vehicleType).State=EntityState.Modified;
+            db.Entry(vehicleType).State = EntityState.Modified;
             return db.SaveChanges() > 0;
         }
 
@@ -33,7 +34,7 @@ namespace Repository
 
         public ICollection<VehicleType> GetAll(bool withDeleted = false)
         {
-            return db.VehicleTypes.Where(c => c.IsDeleted == withDeleted||c.IsDeleted==withDeleted).ToList();
+            return db.VehicleTypes.Where(c => c.IsDeleted == withDeleted).ToList();
         }
 
         public VehicleType GetById(int id)
