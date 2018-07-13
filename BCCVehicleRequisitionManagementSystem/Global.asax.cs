@@ -45,6 +45,9 @@ namespace BCCVehicleRequisitionManagementSystem
                 cfg.CreateMap<Employee, EmployeeProfileViewModel>();
                 cfg.CreateMap<EmployeeRegistrationViewModel, Employee>();
                 cfg.CreateMap<Employee, EmployeeRegistrationViewModel>();
+                 
+                cfg.CreateMap<Requisition, RequisitionViewModel>();
+                cfg.CreateMap<RequisitionViewModel, Requisition>();
             });
         }
     }

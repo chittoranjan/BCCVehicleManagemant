@@ -1,0 +1,99 @@
+﻿@model BCCVehicleRequisitionManagementSystem.ViewModels.RequisitionViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Requisition</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DriverVehicle.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DriverVehicle.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JourneyDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JourneyDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlaceFrom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlaceFrom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlaceTo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlaceTo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JourneyStartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JourneyStartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JourneyEndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JourneyEndTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JourneyDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JourneyDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsApproved)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsApproved)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsCancelled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsCancelled)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

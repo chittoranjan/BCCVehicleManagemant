@@ -1,0 +1,105 @@
+﻿@model BCCVehicleRequisitionManagementSystem.ViewModels.RequisitionViewModel
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Requisition</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DriverVehicle.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DriverVehicle.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JourneyDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JourneyDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlaceFrom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlaceFrom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlaceTo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlaceTo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JourneyStartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JourneyStartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JourneyEndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JourneyEndTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JourneyDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JourneyDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsApproved)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsApproved)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsCancelled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsCancelled)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

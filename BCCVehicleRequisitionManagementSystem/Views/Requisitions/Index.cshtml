@@ -1,0 +1,90 @@
+﻿@model IEnumerable<BCCVehicleRequisitionManagementSystem.ViewModels.RequisitionViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DriverVehicle.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JourneyDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PlaceFrom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PlaceTo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JourneyStartTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JourneyEndTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JourneyDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsApproved)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsCancelled)
+        </th>
+        <th>
+            @Html.Display("Action")
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DriverVehicle.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JourneyDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlaceFrom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlaceTo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JourneyStartTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JourneyEndTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JourneyDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsApproved)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsCancelled)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

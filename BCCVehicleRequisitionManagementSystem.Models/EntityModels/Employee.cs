@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using BCCVehicleRequisitionManagementSystem.Models.Contracts;
 
 namespace BCCVehicleRequisitionManagementSystem.Models.EntityModels
 {
@@ -26,6 +27,7 @@ namespace BCCVehicleRequisitionManagementSystem.Models.EntityModels
         public string Address { get; set; }
 
         public bool IsDeleted { get; set; }
+
         public string UserId { get; set; }
     }
 }

@@ -42,7 +42,7 @@
                     @if (User.IsInRole(AppEnum.RoleEnum.User.ToString()))
                     {
                         <li class=""><a href="@Url.Action("EmployeeProfile", "Employees")">My Profile</a></li>
-                        <li class=""><a href="@Url.Action("Index", "Home")">Requisition</a></li>
+                        <li class=""><a href="@Url.Action("Create", "Requisitions")">Requisition</a></li>
                         <li class=""><a href="@Url.Action("Index","Home")">Vehicle Search</a></li>
                         <li class=""><a href="@Url.Action("Index","Home")">My Requisition</a></li>
                         <li class=""><a href="@Url.Action("Index","Home")">Feedback</a></li>

@@ -56,6 +56,7 @@
     <Compile Include="EntityModels\Employee.cs" />
     <Compile Include="EntityModels\EmployeeDesignation.cs" />
     <Compile Include="EntityModels\GatePass.cs" />
+    <Compile Include="EntityModels\Requisition.cs" />
     <Compile Include="EntityModels\Vehicle.cs" />
     <Compile Include="EntityModels\VehicleType.cs" />
     <Compile Include="Migrations\201806021525274_InitialCreate.cs" />
@@ -97,6 +98,14 @@
     <Compile Include="Migrations\201807060752297_validation_added_in_Employee.cs" />
     <Compile Include="Migrations\201807060752297_validation_added_in_Employee.Designer.cs">
       <DependentUpon>201807060752297_validation_added_in_Employee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807130720235_Requisition_added.cs" />
+    <Compile Include="Migrations\201807130720235_Requisition_added.Designer.cs">
+      <DependentUpon>201807130720235_Requisition_added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807130741223_IsDeleted_added_in_Requisition.cs" />
+    <Compile Include="Migrations\201807130741223_IsDeleted_added_in_Requisition.Designer.cs">
+      <DependentUpon>201807130741223_IsDeleted_added_in_Requisition.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
@@ -155,6 +164,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807060752297_validation_added_in_Employee.resx">
       <DependentUpon>201807060752297_validation_added_in_Employee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807130720235_Requisition_added.resx">
+      <DependentUpon>201807130720235_Requisition_added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807130741223_IsDeleted_added_in_Requisition.resx">
+      <DependentUpon>201807130741223_IsDeleted_added_in_Requisition.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

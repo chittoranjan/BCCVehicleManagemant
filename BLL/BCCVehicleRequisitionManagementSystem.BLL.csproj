@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\Manager.cs" />
+    <Compile Include="RequisitionManager.cs" />
     <Compile Include="EmployeeManager.cs" />
     <Compile Include="EmployeeDesignationManager.cs" />
     <Compile Include="DepartmentManager.cs" />

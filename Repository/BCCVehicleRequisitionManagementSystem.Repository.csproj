@@ -49,6 +49,7 @@
     <Compile Include="DepartmentRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DriverRepository.cs" />
+    <Compile Include="RequisitionRepository.cs" />
     <Compile Include="VehiclesTypeRepository.cs" />
     <Compile Include="VehiclesRepository.cs" />
   </ItemGroup>
