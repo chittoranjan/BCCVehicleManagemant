@@ -20,7 +20,12 @@ namespace BCCVehicleRequisitionManagementSystem.ViewModels
         public Employee Employee { get; set; }
 
         [Required(ErrorMessage = "Please select journey date!")]
-        public DateTime JourneyDate{ get; set; }
+        [Display(Name = "Journey Date and Time")]
+        public DateTime JourneyStartDateTime{ get; set; }
+
+        [Required(ErrorMessage = "Please select journey end time!")]
+        [Display(Name = "Journey End Date and Time")]
+        public DateTime JourneyEndDateTime { get; set; }
 
         [Required(ErrorMessage = "Please write journey start place address!")]
         public string PlaceFrom { get; set; }
@@ -28,20 +33,13 @@ namespace BCCVehicleRequisitionManagementSystem.ViewModels
         [Required(ErrorMessage = "Please write journey to place address!")]
         public string PlaceTo { get; set; }
 
-        [Required(ErrorMessage = "Please select journey start time!")]
-        public DateTime JourneyStartTime { get; set; }
-
-        [Required(ErrorMessage = "Please select journey end time!")]
-        public DateTime JourneyEndTime { get; set; }
+        [Required(ErrorMessage = "Please input set capasity!")]
+        [Display(Name = "Seating capacity")]
+        public int Seat { get; set; }
 
         [Required(ErrorMessage = "Please wirte a sort journey description and causes!")]
-        public string JourneyDescription { get; set; }
-
-        [Required(ErrorMessage = "Please seletc driver and vehicle!")]
-        [Display(Name = "Select Driver")]
-        public int DriverVehicleId { get; set; }
-        public DriverVehicle DriverVehicle { get; set; }
-        public List<DriverVehicle> DriverVehicles { get; set; }
+        [Display(Name = "Description")]
+        public string Description { get; set; }
 
         public bool IsApproved { get; set; }
         public bool IsCancelled { get; set; }

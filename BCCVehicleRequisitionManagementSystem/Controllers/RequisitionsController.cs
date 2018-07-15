@@ -20,7 +20,6 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
     {
          readonly RequisitionManager _requisitionManager = new RequisitionManager();
         readonly EmployeeManager _employeeManager=new EmployeeManager();
-        VehicleDbContext db=new VehicleDbContext();
 
         // GET: Requisitions
         public ActionResult Index()
@@ -50,12 +49,9 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         public ActionResult Create()
         {
             var userId = User.Identity.GetUserId();
-            //ViewBag.DriverVehicleId = new SelectList(_requisitionManager.GetAll(), "Id", "Id");
-            //ViewBag.EmployeeId = employee;;
+
             RequisitionViewModel requisitionViewModel=new RequisitionViewModel();
             requisitionViewModel.Employee = _employeeManager.GetByUserId(userId);
-            requisitionViewModel.DriverVehicles = db.DriverVehicles.Include(c=>c.Driver).Include(c=>c.Vehicle).ToList();
-
 
             return View(requisitionViewModel);
         }
@@ -65,7 +61,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,EmployeeId,JourneyDate,PlaceFrom,PlaceTo,JourneyStartTime,JourneyEndTime,JourneyDescription,DriverVehicleId")] RequisitionViewModel requisitionViewModel)
+        public ActionResult Create([Bind(Include = "Id,EmployeeId,JourneyStartDateTime,JourneyEndDateTime,PlaceFrom,PlaceTo,Seat,Description")] RequisitionViewModel requisitionViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -75,8 +71,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             }
             var userId = User.Identity.GetUserId();
             Employee employee = _employeeManager.GetByUserId(userId);
-            ViewBag.DriverVehicleId = new SelectList(_requisitionManager.GetAll(), "Id", "Id");
-            ViewBag.EmployeeId = employee;
+            requisitionViewModel.Employee = employee;
             return View(requisitionViewModel);
         }
 
@@ -93,12 +88,9 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
                 return HttpNotFound();
             }
             RequisitionViewModel requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisition);
-
-            ViewBag.DriverVehicleId = new SelectList(_requisitionManager.GetAll(), "Id", "Id", requisition.DriverVehicleId);
-
             var userId = User.Identity.GetUserId();
             Employee employee = _employeeManager.GetByUserId(userId);
-            ViewBag.EmployeeId = employee;
+            requisitionViewModel.Employee = employee;
 
             return View(requisitionViewModel);
         }
@@ -108,7 +100,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,EmployeeId,JourneyDate,PlaceFrom,PlaceTo,JourneyStartTime,JourneyEndTime,JourneyDescription,DriverVehicleId")] RequisitionViewModel requisitionViewModel)
+        public ActionResult Edit([Bind(Include = "Id,EmployeeId,JourneyStartDateTime,JourneyEndDateTime,PlaceFrom,PlaceTo,Seat,Description")] RequisitionViewModel requisitionViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -116,14 +108,10 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
                 _requisitionManager.Update(requisition);
                 return RedirectToAction("Index");
             }
-            RequisitionViewModel _requisitionViewModel = Mapper.Map<RequisitionViewModel>(requisitionViewModel);
-
-            ViewBag.DriverVehicleId = new SelectList(_requisitionManager.GetAll(), "Id", "Id", requisitionViewModel.DriverVehicleId);
-
             var userId = User.Identity.GetUserId();
             Employee employee = _employeeManager.GetByUserId(userId);
-            ViewBag.EmployeeId = employee;
-            return View(_requisitionViewModel);
+            requisitionViewModel.Employee = employee;
+            return View(requisitionViewModel);
         }
 
         // GET: Requisitions/Delete/5

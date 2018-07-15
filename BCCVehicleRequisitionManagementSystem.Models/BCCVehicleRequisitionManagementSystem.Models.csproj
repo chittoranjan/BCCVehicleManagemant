@@ -52,10 +52,8 @@
     <Compile Include="DatabaseContext\VehicleDbContext.cs" />
     <Compile Include="EntityModels\Department.cs" />
     <Compile Include="EntityModels\Driver.cs" />
-    <Compile Include="EntityModels\DriverVehicle.cs" />
     <Compile Include="EntityModels\Employee.cs" />
     <Compile Include="EntityModels\EmployeeDesignation.cs" />
-    <Compile Include="EntityModels\GatePass.cs" />
     <Compile Include="EntityModels\Requisition.cs" />
     <Compile Include="EntityModels\Vehicle.cs" />
     <Compile Include="EntityModels\VehicleType.cs" />
@@ -106,6 +104,14 @@
     <Compile Include="Migrations\201807130741223_IsDeleted_added_in_Requisition.cs" />
     <Compile Include="Migrations\201807130741223_IsDeleted_added_in_Requisition.Designer.cs">
       <DependentUpon>201807130741223_IsDeleted_added_in_Requisition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807151157167_remove_DriverVehicle_and_change_Requisition.cs" />
+    <Compile Include="Migrations\201807151157167_remove_DriverVehicle_and_change_Requisition.Designer.cs">
+      <DependentUpon>201807151157167_remove_DriverVehicle_and_change_Requisition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807151225187_change_Requisition.cs" />
+    <Compile Include="Migrations\201807151225187_change_Requisition.Designer.cs">
+      <DependentUpon>201807151225187_change_Requisition.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
@@ -170,6 +176,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807130741223_IsDeleted_added_in_Requisition.resx">
       <DependentUpon>201807130741223_IsDeleted_added_in_Requisition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807151157167_remove_DriverVehicle_and_change_Requisition.resx">
+      <DependentUpon>201807151157167_remove_DriverVehicle_and_change_Requisition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807151225187_change_Requisition.resx">
+      <DependentUpon>201807151225187_change_Requisition.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -16,10 +16,13 @@ namespace BCCVehicleRequisitionManagementSystem.Models.EntityModels
 
         [Required, ForeignKey("Employee")]
         public int EmployeeId { get; set; }
-        public Employee Employee { get; set; }
+       
 
         [Required]
-        public DateTime JourneyDate{ get; set; }
+        public DateTime JourneyStartDateTime{ get; set; }
+
+        [Required]
+        public DateTime JourneyEndDateTime { get; set; }
 
         [Required]
         public string PlaceFrom { get; set; }
@@ -28,21 +31,14 @@ namespace BCCVehicleRequisitionManagementSystem.Models.EntityModels
         public string PlaceTo { get; set; }
 
         [Required]
-        public DateTime JourneyStartTime { get; set; }
-
-        [Required]
-        public DateTime JourneyEndTime { get; set; }
+        public int Seat { get; set; }
 
         [Required, StringLength(1000)]
-        public string JourneyDescription { get; set; }
-
-        [Required ,ForeignKey("DriverVehicle")]
-        public int DriverVehicleId { get; set; }
-        public DriverVehicle DriverVehicle { get; set; }
+        public string Description { get; set; } 
 
         public bool IsApproved { get; set; }
         public bool IsCancelled { get; set; }
-        public bool IsDeleted { get; set; } 
-
+        public bool IsDeleted { get; set; }
+        public Employee Employee { get; set; }
     }
 }

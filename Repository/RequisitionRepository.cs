@@ -33,12 +33,12 @@ namespace Repository
 
         public ICollection<Requisition> GetAll(bool withDeleted = false)
         {
-            return db.Requisitions.Where(c => c.IsDeleted == withDeleted).Include(r => r.DriverVehicle).Include(r => r.Employee).ToList();
+            return db.Requisitions.Where(c => c.IsDeleted == withDeleted).Include(r => r.Employee).ToList();
         }
 
         public Requisition GetById(int id)
         {
-            return db.Requisitions.Include(c=>c.Employee).Include(c=>c.DriverVehicle).First(c => c.Id == id);
+            return db.Requisitions.Include(c=>c.Employee).First(c => c.Id == id);
         }
 
         public void Dispose()

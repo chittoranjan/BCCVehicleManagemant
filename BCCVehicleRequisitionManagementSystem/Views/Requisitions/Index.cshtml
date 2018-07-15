@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BCCVehicleRequisitionManagementSystem.ViewModels.RequisitionViewModel>
+﻿@model System.Collections.Generic.IEnumerable<BCCVehicleRequisitionManagementSystem.ViewModels.RequisitionViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -13,13 +13,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.DriverVehicle.Id)
+            @Html.DisplayNameFor(model => model.EmployeeId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Employee.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.JourneyDate)
+            @Html.DisplayNameFor(model => model.JourneyStartDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JourneyEndDateTime)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PlaceFrom)
@@ -28,19 +31,10 @@
             @Html.DisplayNameFor(model => model.PlaceTo)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.JourneyStartTime)
+            @Html.DisplayNameFor(model => model.Seat)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.JourneyEndTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.JourneyDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsApproved)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsCancelled)
+            @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
             @Html.Display("Action")
@@ -50,13 +44,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.DriverVehicle.Id)
+            @Html.DisplayFor(modelItem => item.EmployeeId)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Employee.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.JourneyDate)
+            @Html.DisplayFor(modelItem => item.JourneyStartDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JourneyEndDateTime)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.PlaceFrom)
@@ -65,19 +62,10 @@
             @Html.DisplayFor(modelItem => item.PlaceTo)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.JourneyStartTime)
+            @Html.DisplayFor(modelItem => item.Seat)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.JourneyEndTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.JourneyDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsApproved)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsCancelled)
+            @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

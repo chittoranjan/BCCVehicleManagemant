@@ -19,9 +19,17 @@ namespace BLL
             {
                 throw new Exception("Employee is not provided!");
             }
-            if (DateTime.Now>=requisition.JourneyDate)
+            if (DateTime.Now>=requisition.JourneyStartDateTime)
             {
-                throw new Exception("Journey date is not valid!");
+                throw new Exception("Journey start date and time is not valid!");
+            }
+            if (DateTime.Now >= requisition.JourneyEndDateTime)
+            {
+                throw new Exception("Journey end date and time is not valid!");
+            }
+            if (requisition.Seat<=0)
+            {
+                throw new Exception("Journey end time is not valid!");
             }
             if (string.IsNullOrEmpty(requisition.PlaceFrom))
             {
@@ -31,22 +39,11 @@ namespace BLL
             {
                 throw new Exception("Journey to is not provided!");
             }
-            if (DateTime.Now >= requisition.JourneyStartTime)
-            {
-                throw new Exception("Journey start time is not valid!");
-            }
-            if (DateTime.Now >= requisition.JourneyEndTime)
-            {
-                throw new Exception("Journey end time is not valid!");
-            }
-            if (string.IsNullOrEmpty(requisition.JourneyDescription))
+            if (string.IsNullOrEmpty(requisition.Description))
             {
                 throw new Exception("Description is not provided!");
             }
-            if (requisition.DriverVehicleId==0)
-            {
-                throw new Exception("Driver is not provided!");
-            }
+
             return _requisitionRepository.Add(requisition);
         }
 
@@ -56,9 +53,17 @@ namespace BLL
             {
                 throw new Exception("Employee is not provided!");
             }
-            if (DateTime.Now >= requisition.JourneyDate)
+            if (DateTime.Now >= requisition.JourneyStartDateTime)
             {
-                throw new Exception("Journey date is not valid!");
+                throw new Exception("Journey start date and time is not valid!");
+            }
+            if (DateTime.Now >= requisition.JourneyEndDateTime)
+            {
+                throw new Exception("Journey end date and time is not valid!");
+            }
+            if (requisition.Seat <= 0)
+            {
+                throw new Exception("Journey end time is not valid!");
             }
             if (string.IsNullOrEmpty(requisition.PlaceFrom))
             {
@@ -68,21 +73,9 @@ namespace BLL
             {
                 throw new Exception("Journey to is not provided!");
             }
-            if (DateTime.Now >= requisition.JourneyStartTime)
-            {
-                throw new Exception("Journey start time is not valid!");
-            }
-            if (DateTime.Now >= requisition.JourneyEndTime)
-            {
-                throw new Exception("Journey end time is not valid!");
-            }
-            if (string.IsNullOrEmpty(requisition.JourneyDescription))
+            if (string.IsNullOrEmpty(requisition.Description))
             {
                 throw new Exception("Description is not provided!");
-            }
-            if (requisition.DriverVehicleId == 0)
-            {
-                throw new Exception("Driver is not provided!");
             }
             return _requisitionRepository.Add(requisition);
         }
@@ -91,7 +84,7 @@ namespace BLL
         {
             if (requisition.Id == 0)
             {
-                throw new Exception("Removable Department is not selected!");
+                throw new Exception("Removable requisition is not valid!");
             }
             requisition.IsDeleted = true;
             return _requisitionRepository.Remove(requisition);
@@ -104,6 +97,10 @@ namespace BLL
 
         public Requisition GetById(int id)
         {
+            if (id==0)
+            {
+                throw new Exception("Select requisition is not valid!");
+            }
             return _requisitionRepository.GetById(id);
         }
 
