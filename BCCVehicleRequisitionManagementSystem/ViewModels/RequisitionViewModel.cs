@@ -34,7 +34,7 @@ namespace BCCVehicleRequisitionManagementSystem.ViewModels
         public string PlaceTo { get; set; }
 
         [Required(ErrorMessage = "Please input set capasity!")]
-        [Display(Name = "Seating capacity")]
+        [Display(Name = "Seat capacity")]
         public int Seat { get; set; }
 
         [Required(ErrorMessage = "Please wirte a sort journey description and causes!")]
