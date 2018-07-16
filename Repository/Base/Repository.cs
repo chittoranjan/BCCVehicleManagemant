@@ -9,10 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using BCCVehicleRequisitionManagementSystem.Models.Contracts;
 using BCCVehicleRequisitionManagementSystem.Models.DatabaseContext;
+using BCCVehicleRequisitionManagementSystem.Repository.Contracts;
 
 namespace Repository.Base
 {
-    public abstract  class Repository<T>:IDisposable where T:class
+    public abstract  class Repository<T>:IRepository<T> where T:class,IEntityModel
     {
         protected VehicleDbContext db=new VehicleDbContext();
         public virtual bool Add(T entity)
@@ -51,16 +52,14 @@ namespace Repository.Base
         public virtual ICollection<T> GetAll(bool withDeleted=false)
         {
 
-
             return db.Set<T>().ToList();
-
 
         }
 
        
         public virtual T GetById(int id)
         {
-            return db.Set<T>().FirstOrDefault(c => ((IEntityModel) c).Id == id);
+            return db.Set<T>().FirstOrDefault(c =>c.Id == id);
         }
         public virtual ICollection<T> Get(Expression<Func<T, bool>> query)
         {
@@ -71,7 +70,7 @@ namespace Repository.Base
             db?.Dispose();
         }
     }
-    public abstract class DeleteableRepository<T> : Repository<T> where T : class, IDeletable
+    public abstract class DeleteableRepository<T> :Repository<T> where T : class, IDeletable, IEntityModel
     {
         public override ICollection<T> GetAll(bool withDeleted = false)
         {

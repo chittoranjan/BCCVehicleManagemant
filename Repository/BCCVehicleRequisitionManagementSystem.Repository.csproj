@@ -62,6 +62,10 @@
       <Project>{753f1ea6-7e45-4641-bfbc-b79abd88ed00}</Project>
       <Name>BCCVehicleRequisitionManagementSystem.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BCCVehicleRequisitionManagementSystem.Repository.Contracts\BCCVehicleRequisitionManagementSystem.Repository.Contracts.csproj">
+      <Project>{A7EA4DE5-6BB7-466B-B585-3166200A257B}</Project>
+      <Name>BCCVehicleRequisitionManagementSystem.Repository.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

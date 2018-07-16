@@ -11,13 +11,14 @@ using BCCVehicleRequisitionManagementSystem.Models.DatabaseContext;
 using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
 using BCCVehicleRequisitionManagementSystem.ViewModels;
 using BLL;
+using Repository;
 
 namespace BCCVehicleRequisitionManagementSystem.Controllers
 {
     public class VehiclesController : Controller
     {
         readonly VehicleManager _vehicleManager=new VehicleManager();
-        readonly VehicleTypeManager _vehicleTypeManager=new VehicleTypeManager();
+        readonly VehicleTypeManager _vehicleTypeManager=new VehicleTypeManager(new VehiclesTypeRepository());
 
         // GET: Vehicles
         public ActionResult Index()

@@ -6,45 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 using BCCVehicleRequisitionManagementSystem.Models.DatabaseContext;
 using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
+using BCCVehicleRequisitionManagementSystem.Repository.Contracts;
 using Repository.Base;
 
 namespace Repository
 {
-    public class VehiclesTypeRepository
+    public class VehiclesTypeRepository:DeleteableRepository<VehicleType>, IVehicleTypeRepository
     {
-        readonly VehicleDbContext db = new VehicleDbContext();
-        public bool Add(VehicleType vehicleType)
-        {
-            db.VehicleTypes.Add(vehicleType);
-            return db.SaveChanges() > 0;
-        }
 
-        public bool Update(VehicleType vehicleType)
+        public ICollection<VehicleType> GetByName(string name)
         {
-            db.VehicleTypes.Attach(vehicleType);
-            db.Entry(vehicleType).State = EntityState.Modified;
-            return db.SaveChanges() > 0;
-        }
-
-        public bool Remove(VehicleType vehicleType)
-        {
-            vehicleType.IsDeleted = true;
-            return Update(vehicleType);
-        }
-
-        public ICollection<VehicleType> GetAll(bool withDeleted = false)
-        {
-            return db.VehicleTypes.Where(c => c.IsDeleted == withDeleted).ToList();
-        }
-
-        public VehicleType GetById(int id)
-        {
-            return db.VehicleTypes.FirstOrDefault(c => c.Id == id);
-        }
-
-        public void Dispose()
-        {
-            db.Dispose();
+            return Get(c => c.TypeName.Contains(name));
         }
     }
 }

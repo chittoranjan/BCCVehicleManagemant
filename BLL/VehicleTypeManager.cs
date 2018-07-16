@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BCCVehicleRequisitionManagementSystem.BLL.Contract;
+using BCCVehicleRequisitionManagementSystem.Models.Contracts;
 using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
+using BCCVehicleRequisitionManagementSystem.Repository.Contracts;
 using BLL.Base;
 using Repository;
 using Repository.Base;
@@ -11,21 +14,16 @@ using Repository.Base;
 namespace BLL
 {
 
-    public class VehicleTypeManager
+    public class VehicleTypeManager:Manager<VehicleType>,IVehicleTypeManager
     {
-        //private VehiclesTypeRepository _vehiclesTypeRepository
-        //{
-        //    get
-        //    {
-        //        VehiclesTypeRepository vehiclesTypeRepository = (VehiclesTypeRepository)Repository;
-        //        return vehiclesTypeRepository;
-        //    }
-        //}
-        //public VehicleTypeManager() : base(new VehiclesTypeRepository())
-        //{
-        //}
-        readonly VehiclesTypeRepository _vehiclesTypeRepository=new VehiclesTypeRepository();
-        public bool Add(VehicleType vehicleType)
+        private IVehicleTypeRepository _vehiclesTypeRepository;
+
+        public VehicleTypeManager(IVehicleTypeRepository vehicleTypeRepository) : base(vehicleTypeRepository)
+        {
+            this._vehiclesTypeRepository = vehicleTypeRepository;
+        }
+
+        public override bool Add(VehicleType vehicleType)
         {
             if (string.IsNullOrEmpty(vehicleType.TypeName))
             {
@@ -34,7 +32,7 @@ namespace BLL
             return _vehiclesTypeRepository.Add(vehicleType);
         }
 
-        public bool Update(VehicleType vehicleType)
+        public override bool Update(VehicleType vehicleType)
         {
             if (string.IsNullOrEmpty(vehicleType.TypeName))
             {
@@ -43,28 +41,22 @@ namespace BLL
             return _vehiclesTypeRepository.Update(vehicleType);
         }
 
-        public  bool Remove(VehicleType vehicleType)
+        public override bool Remove(IDeletable vehicleType)
         {
-            if (vehicleType.Id == 0)
-            {
-                throw new Exception("Removable Vehicle Type is not selected!");
-            }
+
             return _vehiclesTypeRepository.Remove(vehicleType);
         }
 
-        public ICollection<VehicleType> GetAll(bool withDeleted = false)
+        public override ICollection<VehicleType> GetAll(bool withDeleted = false)
         {
             return _vehiclesTypeRepository.GetAll(withDeleted);
         }
 
-        public VehicleType GetById(int id)
+        public override VehicleType GetById(int id)
         {
             return _vehiclesTypeRepository.GetById(id);
         }
 
-        public void Dispose()
-        {
-            _vehiclesTypeRepository.Dispose();
-        }
+
     }
 }

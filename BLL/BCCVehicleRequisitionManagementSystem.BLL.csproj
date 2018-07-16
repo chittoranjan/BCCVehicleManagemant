@@ -51,6 +51,10 @@
     <Compile Include="VehicleManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BCCVehicleRequisitionManagementSystem.BLL.Contract\BCCVehicleRequisitionManagementSystem.BLL.Contract.csproj">
+      <Project>{15896334-F433-4EB2-9090-DACF9FA6E1A4}</Project>
+      <Name>BCCVehicleRequisitionManagementSystem.BLL.Contract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BCCVehicleRequisitionManagementSystem.Models.Contracts\BCCVehicleRequisitionManagementSystem.Models.Contracts.csproj">
       <Project>{E97B5155-F41A-46BD-B99F-74781FC9D8AE}</Project>
       <Name>BCCVehicleRequisitionManagementSystem.Models.Contracts</Name>
@@ -58,6 +62,10 @@
     <ProjectReference Include="..\BCCVehicleRequisitionManagementSystem.Models\BCCVehicleRequisitionManagementSystem.Models.csproj">
       <Project>{753f1ea6-7e45-4641-bfbc-b79abd88ed00}</Project>
       <Name>BCCVehicleRequisitionManagementSystem.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BCCVehicleRequisitionManagementSystem.Repository.Contracts\BCCVehicleRequisitionManagementSystem.Repository.Contracts.csproj">
+      <Project>{A7EA4DE5-6BB7-466B-B585-3166200A257B}</Project>
+      <Name>BCCVehicleRequisitionManagementSystem.Repository.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Repository\BCCVehicleRequisitionManagementSystem.Repository.csproj">
       <Project>{b99cf6d9-06ab-4c6c-820f-db4a54938e80}</Project>
