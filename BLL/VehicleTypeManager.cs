@@ -16,7 +16,7 @@ namespace BLL
 
     public class VehicleTypeManager:Manager<VehicleType>,IVehicleTypeManager
     {
-        private IVehicleTypeRepository _vehiclesTypeRepository;
+        readonly IVehicleTypeRepository _vehiclesTypeRepository;
 
         public VehicleTypeManager(IVehicleTypeRepository vehicleTypeRepository) : base(vehicleTypeRepository)
         {
@@ -41,19 +41,12 @@ namespace BLL
             return _vehiclesTypeRepository.Update(vehicleType);
         }
 
-        public override bool Remove(IDeletable vehicleType)
-        {
-
-            return _vehiclesTypeRepository.Remove(vehicleType);
-        }
-
-        public override ICollection<VehicleType> GetAll(bool withDeleted = false)
-        {
-            return _vehiclesTypeRepository.GetAll(withDeleted);
-        }
-
         public override VehicleType GetById(int id)
         {
+            if (id==0)
+            {
+                throw new Exception("Vehicle id is not provided!");
+            }
             return _vehiclesTypeRepository.GetById(id);
         }
 

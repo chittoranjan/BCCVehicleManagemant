@@ -13,21 +13,26 @@ using BCCVehicleRequisitionManagementSystem.Repository.Contracts;
 
 namespace Repository.Base
 {
-    public abstract  class Repository<T>:IRepository<T> where T:class,IEntityModel
+    public abstract  class Repository<T>:IRepository<T> where T:class,IEntityModel,IDeletable
     {
-        protected VehicleDbContext db=new VehicleDbContext();
+        protected DbContext Db;
+
+        protected Repository(DbContext db)
+        {
+            this.Db = db;
+        }
         public virtual bool Add(T entity)
         {
-            db.Set<T>().Add(entity);
-            return db.SaveChanges() > 0;
+            Db.Set<T>().Add(entity);
+            return Db.SaveChanges() > 0;
 
         }
 
         public virtual bool Update(T entity)
         {
-            db.Set<T>().Attach(entity);
-            db.Entry(entity).State=EntityState.Modified;
-            return db.SaveChanges()>0;
+            Db.Set<T>().Attach(entity);
+            Db.Entry(entity).State=EntityState.Modified;
+            return Db.SaveChanges()>0;
         }
 
         public virtual bool Remove(IDeletable entity)
@@ -52,29 +57,33 @@ namespace Repository.Base
         public virtual ICollection<T> GetAll(bool withDeleted=false)
         {
 
-            return db.Set<T>().ToList();
+            return Db.Set<T>().Where(c=>c.IsDeleted==false||c.IsDeleted==withDeleted).ToList();
 
         }
 
        
         public virtual T GetById(int id)
         {
-            return db.Set<T>().FirstOrDefault(c =>c.Id == id);
+            return Db.Set<T>().FirstOrDefault(c =>c.Id == id);
         }
         public virtual ICollection<T> Get(Expression<Func<T, bool>> query)
         {
-            return db.Set<T>().Where(query).ToList();
+            return Db.Set<T>().Where(query).ToList();
         }
         public virtual void Dispose()
         {
-            db?.Dispose();
+            Db?.Dispose();
         }
     }
     public abstract class DeleteableRepository<T> :Repository<T> where T : class, IDeletable, IEntityModel
     {
         public override ICollection<T> GetAll(bool withDeleted = false)
         {
-            return db.Set<T>().Where(c => c.IsDeleted == false || c.IsDeleted == withDeleted).ToList();
+            return Db.Set<T>().Where(c => c.IsDeleted == false || c.IsDeleted == withDeleted).ToList();
+        }
+
+        protected DeleteableRepository(DbContext db) : base(db)
+        {
         }
     }
 }

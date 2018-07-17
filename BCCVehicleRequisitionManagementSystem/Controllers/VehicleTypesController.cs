@@ -17,11 +17,12 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
 {
     public class VehicleTypesController : Controller
     {
-        IVehicleTypeManager _vehicleTypeManager;
+        readonly IVehicleTypeManager _vehicleTypeManager;
 
-        public VehicleTypesController()
+
+        public VehicleTypesController(IVehicleTypeManager vehicleTypeManager)
         {
-            _vehicleTypeManager=new VehicleTypeManager(new VehiclesTypeRepository());
+            _vehicleTypeManager = vehicleTypeManager;
         }
 
         // GET: VehicleTypes

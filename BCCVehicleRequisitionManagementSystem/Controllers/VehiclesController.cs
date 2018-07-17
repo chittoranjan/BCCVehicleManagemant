@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using BCCVehicleRequisitionManagementSystem.BLL.Contract;
 using BCCVehicleRequisitionManagementSystem.Models.DatabaseContext;
 using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
 using BCCVehicleRequisitionManagementSystem.ViewModels;
@@ -18,7 +19,12 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
     public class VehiclesController : Controller
     {
         readonly VehicleManager _vehicleManager=new VehicleManager();
-        readonly VehicleTypeManager _vehicleTypeManager=new VehicleTypeManager(new VehiclesTypeRepository());
+        readonly IVehicleTypeManager _vehicleTypeManager;
+
+        public VehiclesController(IVehicleTypeManager vehicleTypeManager)
+        {
+            this._vehicleTypeManager = vehicleTypeManager;
+        }
 
         // GET: Vehicles
         public ActionResult Index()

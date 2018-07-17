@@ -11,12 +11,17 @@ using Repository.Base;
 
 namespace Repository
 {
-    public class VehiclesTypeRepository:DeleteableRepository<VehicleType>, IVehicleTypeRepository
+    public class VehiclesTypeRepository:Repository<VehicleType>, IVehicleTypeRepository
     {
 
         public ICollection<VehicleType> GetByName(string name)
         {
             return Get(c => c.TypeName.Contains(name));
         }
+
+        public VehiclesTypeRepository(DbContext db) : base(db)
+        {
+        }
+
     }
 }
