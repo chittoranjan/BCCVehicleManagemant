@@ -55,7 +55,9 @@ namespace BCCVehicleRequisitionManagementSystem
             container.RegisterType<IVehicleTypeRepository,VehiclesTypeRepository>();
             container.RegisterType<IVehicleManager, VehicleManager>();
             container.RegisterType<IVehicleRepository, VehicleRepository>();
-            
+            container.RegisterType<IDriverManager, DriverManager>();
+            container.RegisterType<IDriverRepository, DriverRepository>();
+
         }
     }
 }

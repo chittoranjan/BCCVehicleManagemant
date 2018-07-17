@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using BCCVehicleRequisitionManagementSystem.BLL.Contract;
 using BCCVehicleRequisitionManagementSystem.Models;
 using BCCVehicleRequisitionManagementSystem.Models.DatabaseContext;
 using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
@@ -17,7 +18,12 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
 {
     public class DriversController : Controller
     {
-         readonly DriverManager _driverManager=new DriverManager();
+        private readonly IDriverManager _driverManager;
+
+        public DriversController(IDriverManager driverManager)
+        {
+            this._driverManager = driverManager;
+        }
 
         // GET: Drivers
         public ActionResult Index()

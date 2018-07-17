@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BCCVehicleRequisitionManagementSystem.BLL.Contract;
+using BCCVehicleRequisitionManagementSystem.Models.Contracts;
 using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
+using BCCVehicleRequisitionManagementSystem.Repository.Contracts;
+using BLL.Base;
 using Repository;
 
 namespace BLL
 {
 
-    public class DriverManager
+    public class DriverManager:Manager<Driver>,IDriverManager
     {
-        readonly DriverRepository _repository = new DriverRepository();
-
-        public bool Add(Driver driver)
+        private readonly IDriverRepository _repository;
+        public DriverManager(IDriverRepository repository) : base(repository)
+        {
+            this._repository = repository;
+        }
+        public override bool Add(Driver driver)
         {
             if (string.IsNullOrEmpty(driver.Name))
             {
@@ -38,7 +45,7 @@ namespace BLL
             return _repository.Add(driver);
         }
 
-        public bool Update(Driver driver)
+        public override bool Update(Driver driver)
         {
             if (string.IsNullOrEmpty(driver.Name))
             {
@@ -63,29 +70,13 @@ namespace BLL
             return _repository.Update(driver);
         }
 
-        public bool Remove(Driver driver)
+        public override Driver GetById(int id)
         {
-            if (driver.Id == 0)
+            if (id==0)
             {
-                throw new Exception("Removable driver is not selected!");
+                throw new Exception("Driver id is not provided!");
             }
-            driver.IsDeleted = true;
-            return _repository.Remove(driver);
-        }
-
-        public ICollection<Driver> GetAll(bool withDeleted = false)
-        {
-            return _repository.GetAll(withDeleted);
-        }
-
-        public Driver GetById(int id)
-        {
             return _repository.GetById(id);
-        }
-
-        public void Dispose()
-        {
-            _repository.Dispose();
-        }
+        }       
     }
 }

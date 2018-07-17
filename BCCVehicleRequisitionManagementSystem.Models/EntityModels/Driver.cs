@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using BCCVehicleRequisitionManagementSystem.Models.Contracts;
 
 namespace BCCVehicleRequisitionManagementSystem.Models.EntityModels
 {
-    public class Driver
+    public class Driver : IEntityModel,IDeletable
     {
         [Key]
         public int Id { get; set; }
@@ -23,5 +24,10 @@ namespace BCCVehicleRequisitionManagementSystem.Models.EntityModels
         public string Address { get; set; }
 
         public bool IsDeleted { get; set; }
+        public bool Delete()
+        {
+            IsDeleted = true;
+            return IsDeleted;
+        }
     }
 }
