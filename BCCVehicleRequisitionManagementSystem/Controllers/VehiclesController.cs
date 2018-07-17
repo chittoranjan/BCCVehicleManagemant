@@ -18,11 +18,12 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
 {
     public class VehiclesController : Controller
     {
-        readonly VehicleManager _vehicleManager=new VehicleManager();
+        readonly IVehicleManager _vehicleManager;
         readonly IVehicleTypeManager _vehicleTypeManager;
 
-        public VehiclesController(IVehicleTypeManager vehicleTypeManager)
+        public VehiclesController(IVehicleManager vehicleManager,IVehicleTypeManager vehicleTypeManager)
         {
+            this._vehicleManager = vehicleManager;
             this._vehicleTypeManager = vehicleTypeManager;
         }
 
@@ -155,6 +156,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             if (disposing)
             {
                 _vehicleManager.Dispose();
+                _vehicleTypeManager.Dispose();
             }
             base.Dispose(disposing);
         }

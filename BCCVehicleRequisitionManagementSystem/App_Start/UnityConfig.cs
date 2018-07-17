@@ -50,9 +50,12 @@ namespace BCCVehicleRequisitionManagementSystem
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<AccountController>(new InjectionConstructor());
+            container.RegisterType<DbContext, VehicleDbContext>();
             container.RegisterType<IVehicleTypeManager, VehicleTypeManager > ();
             container.RegisterType<IVehicleTypeRepository,VehiclesTypeRepository>();
-            container.RegisterType<DbContext, VehicleDbContext>();
+            container.RegisterType<IVehicleManager, VehicleManager>();
+            container.RegisterType<IVehicleRepository, VehicleRepository>();
+            
         }
     }
 }

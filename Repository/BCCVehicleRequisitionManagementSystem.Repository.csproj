@@ -51,7 +51,7 @@
     <Compile Include="DriverRepository.cs" />
     <Compile Include="RequisitionRepository.cs" />
     <Compile Include="VehiclesTypeRepository.cs" />
-    <Compile Include="VehiclesRepository.cs" />
+    <Compile Include="VehicleRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BCCVehicleRequisitionManagementSystem.Models.Contracts\BCCVehicleRequisitionManagementSystem.Models.Contracts.csproj">
