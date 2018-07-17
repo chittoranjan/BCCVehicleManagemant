@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using BCCVehicleRequisitionManagementSystem.BLL.Contract;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -14,6 +15,7 @@ using BCCVehicleRequisitionManagementSystem.Models.DatabaseContext;
 using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
 using BLL;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Repository;
 
 namespace BCCVehicleRequisitionManagementSystem.Controllers
 {
@@ -24,15 +26,16 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         private ApplicationUserManager _userManager;
 
         readonly EmployeeManager _employeeManager = new EmployeeManager();
-        readonly DepartmentManager _departmentManager = new DepartmentManager();
+        private readonly IDepartmentManager _departmentManager;
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager,IDepartmentManager departmentManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _departmentManager = departmentManager;
         }
 
         public ApplicationSignInManager SignInManager

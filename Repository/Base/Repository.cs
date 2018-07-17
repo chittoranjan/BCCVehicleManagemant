@@ -21,6 +21,11 @@ namespace Repository.Base
         {
             this.Db = db;
         }
+
+        public Repository()
+        {
+        }
+
         public virtual bool Add(T entity)
         {
             Db.Set<T>().Add(entity);

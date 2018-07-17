@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using BCCVehicleRequisitionManagementSystem.BLL.Contract;
 using BCCVehicleRequisitionManagementSystem.Models.DatabaseContext;
 using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
 using BCCVehicleRequisitionManagementSystem.Models.Migrations;
@@ -17,7 +18,12 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
 {
     public class DepartmentsController : Controller
     {
-        readonly DepartmentManager _departmentManager=new DepartmentManager();
+        private readonly IDepartmentManager _departmentManager;
+
+        public DepartmentsController(IDepartmentManager departmentManager)
+        {
+            this._departmentManager = departmentManager;
+        }
 
         // GET: Departments
         public ActionResult Index()

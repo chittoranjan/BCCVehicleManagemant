@@ -6,44 +6,16 @@ using System.Text;
 using System.Threading.Tasks;
 using BCCVehicleRequisitionManagementSystem.Models.DatabaseContext;
 using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
+using BCCVehicleRequisitionManagementSystem.Repository.Contracts;
+using Repository.Base;
 
 namespace Repository
 {
-    public class DepartmentRepository   
+    public class DepartmentRepository:Repository<Department>,IDepartmentRepository
     {
-        readonly VehicleDbContext db=new VehicleDbContext();
-        public bool Add(Department department)
-        {
-            db.Departments.Add(department);
-            return db.SaveChanges()>0;
-        }
 
-        public bool Update(Department department)
+        public DepartmentRepository(DbContext db) : base(db)
         {
-            db.Departments.Attach(department);
-            db.Entry(department).State=EntityState.Modified;
-            return db.SaveChanges() > 0;
-        }
-
-        public bool Remove(Department department)
-        {
-            department.IsDeleted = true;
-            return Update(department);
-        }
-
-        public ICollection<Department> GetAll(bool withDeleted = false)
-        {
-            return db.Departments.Where(c => c.IsDeleted == withDeleted).ToList();
-        }
-
-        public Department GetById(int id)
-        {
-            return db.Departments.FirstOrDefault(c => c.Id == id);
-        }
-
-        public void Dispose()
-        {
-            db.Dispose();
         }
     }
 }
