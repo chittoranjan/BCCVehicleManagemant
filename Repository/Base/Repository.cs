@@ -13,7 +13,7 @@ using BCCVehicleRequisitionManagementSystem.Repository.Contracts;
 
 namespace Repository.Base
 {
-    public abstract  class Repository<T>:IRepository<T> where T:class,IEntityModel,IDeletable
+    public abstract  class Repository<T>:IRepository<T> where T:class, IEntityModel, IDeletable
     {
         protected DbContext Db;
 
@@ -21,11 +21,6 @@ namespace Repository.Base
         {
             this.Db = db;
         }
-
-        public Repository()
-        {
-        }
-
         public virtual bool Add(T entity)
         {
             Db.Set<T>().Add(entity);

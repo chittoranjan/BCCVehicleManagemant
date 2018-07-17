@@ -19,11 +19,12 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
     {
         readonly EmployeeManager _employeeManager=new EmployeeManager();
         private readonly IDepartmentManager _departmentManager;
-        readonly EmployeeDesignationManager _employeeDesignation=new EmployeeDesignationManager();
+        private readonly IEmployeeDesignationManager _employeeDesignationManager;
 
-        public EmployeesController(IDepartmentManager departmentManager)
+        public EmployeesController(IDepartmentManager departmentManager,IEmployeeDesignationManager employeeDesignationManager)
         {
             this._departmentManager = departmentManager;
+            this._employeeDesignationManager = employeeDesignationManager;
         }
         // GET: Employees
         public ActionResult Index()
@@ -94,7 +95,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeViewModel.DepartmentId);
             if(ViewBag.DepartmentId != null)
             {
-                ViewBag.EmployeeDesignationId = new SelectList(_employeeDesignation.GetByDepartmentId(employeeViewModel.DepartmentId), "Id", "Designation", employeeViewModel.EmployeeDesignationId);
+                ViewBag.EmployeeDesignationId = new SelectList(_employeeDesignationManager.GetByDepartmentId(employeeViewModel.DepartmentId), "Id", "Designation", employeeViewModel.EmployeeDesignationId);
             }
             
             return View(employeeViewModel);
@@ -120,7 +121,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeVm.DepartmentId);
             if (ViewBag.DepartmentId!=null)
             {
-                ViewBag.EmployeeDesignationId = new SelectList(_employeeDesignation.GetByDepartmentId(employeeVm.DepartmentId), "Id", "Designation", employeeVm.EmployeeDesignationId);
+                ViewBag.EmployeeDesignationId = new SelectList(_employeeDesignationManager.GetByDepartmentId(employeeVm.DepartmentId), "Id", "Designation", employeeVm.EmployeeDesignationId);
             }
             
             return View(employeeVm);
@@ -186,7 +187,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeProfileViewModel.DepartmentId);
             if (ViewBag.DepartmentId!=null)
             {
-                ViewBag.EmployeeDesignationId = new SelectList(_employeeDesignation.GetByDepartmentId(employeeProfileViewModel.DepartmentId), "Id", "Designation", employeeProfileViewModel.EmployeeDesignationId);
+                ViewBag.EmployeeDesignationId = new SelectList(_employeeDesignationManager.GetByDepartmentId(employeeProfileViewModel.DepartmentId), "Id", "Designation", employeeProfileViewModel.EmployeeDesignationId);
             }
             
             return View(employeeProfileViewModel);
@@ -212,7 +213,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             ViewBag.DepartmentId = new SelectList(_departmentManager.GetAll(), "Id", "Name", employeeProfileViewModel.DepartmentId);
             if (ViewBag.DepartmentId != null)
             {
-                ViewBag.EmployeeDesignationId = new SelectList(_employeeDesignation.GetByDepartmentId(employeeProfileViewModel.DepartmentId), "Id", "Designation", employeeProfileViewModel.EmployeeDesignationId);
+                ViewBag.EmployeeDesignationId = new SelectList(_employeeDesignationManager.GetByDepartmentId(employeeProfileViewModel.DepartmentId), "Id", "Designation", employeeProfileViewModel.EmployeeDesignationId);
             }
             return View(employeeProfileViewModel);
         }
@@ -251,7 +252,7 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
             {
                 _employeeManager.Dispose();
                 _departmentManager.Dispose();
-                _employeeDesignation.Dispose();
+                _employeeDesignationManager.Dispose();
             }
             base.Dispose(disposing);
         }

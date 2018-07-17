@@ -8,7 +8,7 @@ using BCCVehicleRequisitionManagementSystem.Models.Contracts;
 
 namespace BCCVehicleRequisitionManagementSystem.Repository.Contracts
 {
-    public interface IRepository<T>:IDisposable where T:class ,IEntityModel
+    public interface IRepository<T>:IDisposable where T:class ,IEntityModel,IDeletable
     {
         bool Add(T entity);
         bool Update(T entity);

@@ -17,12 +17,14 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
 {
     public class EmployeeDesignationsController : Controller
     {
-        readonly EmployeeDesignationManager _employeeDesignationManager=new EmployeeDesignationManager();
-        private readonly IDepartmentManager _departmentManager;
+        readonly IEmployeeDesignationManager _employeeDesignationManager;
+        readonly IDepartmentManager _departmentManager;
 
-        public EmployeeDesignationsController(IDepartmentManager departmentManager)
+        public EmployeeDesignationsController(IEmployeeDesignationManager employeeDesignationManager,IDepartmentManager departmentManager)
         {
+            this._employeeDesignationManager = employeeDesignationManager;
             this._departmentManager = departmentManager;
+
         }
 
         // GET: EmployeeDesignations

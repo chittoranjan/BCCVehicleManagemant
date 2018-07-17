@@ -12,7 +12,7 @@ using Repository.Base;
 
 namespace BLL.Base
 {
-    public abstract class Manager<T>:IManager<T> where T:class, IEntityModel
+    public abstract class Manager<T>:IManager<T> where T:class, IEntityModel,IDeletable
     {
         protected IRepository<T> repository;
 

@@ -6,48 +6,21 @@ using System.Text;
 using System.Threading.Tasks;
 using BCCVehicleRequisitionManagementSystem.Models.DatabaseContext;
 using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
+using BCCVehicleRequisitionManagementSystem.Repository.Contracts;
+using Repository.Base;
 
 namespace Repository
 {
-    public class EmployeeDesignationRepository
+    public class EmployeeDesignationRepository:Repository<EmployeeDesignation>,IEmployeeDesignationRepository
     {
-        readonly VehicleDbContext db=new VehicleDbContext();
-        public bool Add(EmployeeDesignation employeeDesignation)
+        public ICollection<EmployeeDesignation> GetByDepartmentId(int departmentId)
         {
-            db.EmployeeDesignations.Add(employeeDesignation);
-            return db.SaveChanges()>0;
+
+            return Get(c => c.DepartmentId == departmentId).ToList();
         }
 
-        public bool Update(EmployeeDesignation employeeDesignation)
+        public EmployeeDesignationRepository(DbContext db) : base(db)
         {
-            db.EmployeeDesignations.Attach(employeeDesignation);
-            db.Entry(employeeDesignation).State=EntityState.Modified;
-            return db.SaveChanges() > 0;
-        }
-
-        public bool Remove(EmployeeDesignation employeeDesignation)
-        {
-            employeeDesignation.IsDeleted = true;
-            return Update(employeeDesignation);
-        }
-
-        public ICollection<EmployeeDesignation> GetAll(bool withDeleted = false)
-        {
-            return db.EmployeeDesignations.Where(c => c.IsDeleted == withDeleted).Include(c=>c.Department).ToList();
-        }
-
-        public EmployeeDesignation GetById(int id)
-        {
-            return db.EmployeeDesignations.Include(c=>c.Department).FirstOrDefault(c => c.Id == id);
-        }
-
-        public ICollection<EmployeeDesignation> GetByDepartmentId(int id)
-        {
-            return db.EmployeeDesignations.Where(c => c.DepartmentId == id).ToList();
-        }
-        public void Dispose()
-        {
-            db.Dispose();
         }
     }
 }

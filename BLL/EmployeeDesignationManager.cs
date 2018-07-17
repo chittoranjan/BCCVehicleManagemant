@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BCCVehicleRequisitionManagementSystem.BLL.Contract;
+using BCCVehicleRequisitionManagementSystem.Models.Contracts;
 using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
+using BCCVehicleRequisitionManagementSystem.Repository.Contracts;
+using BLL.Base;
 using Repository;
 
 namespace BLL
 {
 
-    public class EmployeeDesignationManager
+    public class EmployeeDesignationManager:Manager<EmployeeDesignation>,IEmployeeDesignationManager
     {
-        readonly EmployeeDesignationRepository _repository = new EmployeeDesignationRepository();
-
-        public bool Add(EmployeeDesignation employeeDesignation)
+        readonly IEmployeeDesignationRepository _employeeDesignationRepository;
+        public EmployeeDesignationManager(IEmployeeDesignationRepository employeeDesignationRepository) : base(employeeDesignationRepository)
+        {
+            this._employeeDesignationRepository = employeeDesignationRepository;
+        }
+        public override bool Add(EmployeeDesignation employeeDesignation)
         {
             if (string.IsNullOrEmpty(employeeDesignation.Designation))
             {
@@ -23,10 +30,10 @@ namespace BLL
             {
                 throw new Exception("Department is not proveded!");
             }
-            return _repository.Add(employeeDesignation);
+            return _employeeDesignationRepository.Add(employeeDesignation);
         }
 
-        public bool Update(EmployeeDesignation employeeDesignation)
+        public override bool Update(EmployeeDesignation employeeDesignation)
         {
             if (string.IsNullOrEmpty(employeeDesignation.Designation))
             {
@@ -36,38 +43,26 @@ namespace BLL
             {
                 throw new Exception("Department is not proveded!");
             }
-            return _repository.Update(employeeDesignation);
+            return _employeeDesignationRepository.Update(employeeDesignation);
         }
 
-        public bool Remove(EmployeeDesignation employeeDesignation)
+        public override EmployeeDesignation GetById(int id)
         {
-            if (employeeDesignation.Id == 0)
+            if (id==0)
             {
-                throw new Exception("Removable Designation is not selected!");
+                throw new Exception("Employee designation is not provided!");
             }
-            employeeDesignation.IsDeleted = true;
-            return _repository.Remove(employeeDesignation);
-        }
-
-        public ICollection<EmployeeDesignation> GetAll(bool withDeleted = false)
-        {
-            return _repository.GetAll(withDeleted);
-        }
-
-        public EmployeeDesignation GetById(int id)
-        {
-            return _repository.GetById(id);
+            return _employeeDesignationRepository.GetById(id);
         }
 
         public ICollection<EmployeeDesignation> GetByDepartmentId(int departmentId)
         {
-            return _repository.GetByDepartmentId(departmentId);
+            if (departmentId==0)
+            {
+                throw new Exception("Department id is not provided!");
+            }
+            return _employeeDesignationRepository.GetByDepartmentId(departmentId);
         }
-        public void Dispose()
-        {
-            _repository.Dispose();
-        }
-
         
     }
 }
