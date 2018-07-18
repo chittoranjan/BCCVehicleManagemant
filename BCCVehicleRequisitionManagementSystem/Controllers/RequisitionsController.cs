@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using BCCVehicleRequisitionManagementSystem.BLL.Contract;
 using BCCVehicleRequisitionManagementSystem.Models.DatabaseContext;
 using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
 using BCCVehicleRequisitionManagementSystem.ViewModels;
@@ -18,8 +19,13 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
 {
     public class RequisitionsController : Controller
     {
-         readonly RequisitionManager _requisitionManager = new RequisitionManager();
-        readonly EmployeeManager _employeeManager=new EmployeeManager();
+        readonly RequisitionManager _requisitionManager = new RequisitionManager();
+        readonly IEmployeeManager _employeeManager;
+
+        public RequisitionsController(IEmployeeManager employeeManager)
+        {
+            this._employeeManager = employeeManager;
+        }
 
         // GET: Requisitions
         public ActionResult Index()

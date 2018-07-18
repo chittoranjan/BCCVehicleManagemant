@@ -51,16 +51,24 @@ namespace BCCVehicleRequisitionManagementSystem
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<AccountController>(new InjectionConstructor());
             container.RegisterType<DbContext, VehicleDbContext>();
+
             container.RegisterType<IVehicleTypeManager, VehicleTypeManager > ();
             container.RegisterType<IVehicleTypeRepository,VehiclesTypeRepository>();
+
             container.RegisterType<IVehicleManager, VehicleManager>();
             container.RegisterType<IVehicleRepository, VehicleRepository>();
+
             container.RegisterType<IDriverManager, DriverManager>();
             container.RegisterType<IDriverRepository, DriverRepository>();
+
             container.RegisterType<IDepartmentManager, DepartmentManager>();
             container.RegisterType<IDepartmentRepository, DepartmentRepository>();
+
             container.RegisterType<IEmployeeDesignationManager, EmployeeDesignationManager>();
             container.RegisterType<IEmployeeDesignationRepository, EmployeeDesignationRepository>();
+
+            container.RegisterType<IEmployeeManager, EmployeeManager>();
+            container.RegisterType<IEmployeeRepository, EmployeeRepository>();
 
         }
     }

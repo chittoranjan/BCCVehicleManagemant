@@ -4,7 +4,7 @@ using BCCVehicleRequisitionManagementSystem.Models.Contracts;
 
 namespace BCCVehicleRequisitionManagementSystem.Models.EntityModels
 {
-    public class Employee
+    public class Employee : IEntityModel, IDeletable
     {
         [Key]
         public int Id { get; set; }
@@ -27,6 +27,11 @@ namespace BCCVehicleRequisitionManagementSystem.Models.EntityModels
         public string Address { get; set; }
 
         public bool IsDeleted { get; set; }
+        public bool Delete()
+        {
+            IsDeleted = true;
+            return IsDeleted;
+        }
 
         public string UserId { get; set; }
     }

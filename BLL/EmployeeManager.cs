@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BCCVehicleRequisitionManagementSystem.BLL.Contract;
 using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
+using BCCVehicleRequisitionManagementSystem.Repository.Contracts;
+using BLL.Base;
 using Repository;
 
 namespace BLL
 {
 
-    public class EmployeeManager
+    public class EmployeeManager:Manager<Employee>,IEmployeeManager
     {
-        readonly EmployeeRepository _repository = new EmployeeRepository();
+        readonly IEmployeeRepository _employeeRepository;
+        public EmployeeManager(IEmployeeRepository employeeRepository) : base(employeeRepository)
+        {
+            this._employeeRepository = employeeRepository;
+        }
 
-        public bool Add(Employee employee)
+        public override bool Add(Employee employee)
         {
             if (string.IsNullOrEmpty(employee.Name))
             {
@@ -35,10 +42,10 @@ namespace BLL
             {
                 throw new Exception("Address is not provided!");
             }
-            return _repository.Add(employee);
+            return _employeeRepository.Add(employee);
         }
 
-        public bool Update(Employee employee)
+        public override bool Update(Employee employee)
         {
             if (string.IsNullOrEmpty(employee.Name))
             {
@@ -60,36 +67,26 @@ namespace BLL
             {
                 throw new Exception("Address is not provided!");
             }
-            return _repository.Update(employee);
+            return _employeeRepository.Update(employee);
         }
 
-        public bool Remove(Employee employee)
+        public override Employee GetById(int id)
         {
-            if (employee.Id == 0)
+            if (id==0)
             {
-                throw new Exception("Removable Employee is not selected!");
+                throw new Exception("Employee id is not proviede!");
             }
-            employee.IsDeleted = true;
-            return _repository.Remove(employee);
-        }
-
-        public ICollection<Employee> GetAll(bool withDeleted = false)
-        {
-            return _repository.GetAll(withDeleted);
-        }
-
-        public Employee GetById(int id)
-        {
-            return _repository.GetById(id);
+            return _employeeRepository.GetById(id);
         }
 
         public Employee GetByUserId(string userId)
         {
-            return _repository.GetByUserId(userId);
+            if (string.IsNullOrEmpty(userId))
+            {
+                throw new Exception("User id is not provided!");
+            }
+            return _employeeRepository.GetByUserId(userId);
         }
-        public void Dispose()
-        {
-            _repository.Dispose();
-        }
+        
     }
 }

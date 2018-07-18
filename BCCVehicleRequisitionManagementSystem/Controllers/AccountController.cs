@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -13,6 +14,7 @@ using Microsoft.Owin.Security;
 using BCCVehicleRequisitionManagementSystem.Models;
 using BCCVehicleRequisitionManagementSystem.Models.DatabaseContext;
 using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
+using BCCVehicleRequisitionManagementSystem.Repository.Contracts;
 using BLL;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Repository;
@@ -25,16 +27,18 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        readonly EmployeeManager _employeeManager = new EmployeeManager();
-        private readonly IDepartmentManager _departmentManager;
+        readonly IEmployeeManager _employeeManager;
+        readonly IDepartmentManager _departmentManager;
         public AccountController()
         {
+            
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager,IDepartmentManager departmentManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IDepartmentManager departmentManager, IEmployeeManager employeeManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _employeeManager = employeeManager;
             _departmentManager = departmentManager;
         }
 
@@ -442,9 +446,14 @@ namespace BCCVehicleRequisitionManagementSystem.Controllers
                     _signInManager.Dispose();
                     _signInManager = null;
                 }
+                if (_employeeManager !=null)
+                {
+                    _employeeManager.Dispose();
+                    _departmentManager.Dispose();
+                }
             }
-            _employeeManager.Dispose();
-            _departmentManager.Dispose();
+            
+           
             base.Dispose(disposing);
         }
 

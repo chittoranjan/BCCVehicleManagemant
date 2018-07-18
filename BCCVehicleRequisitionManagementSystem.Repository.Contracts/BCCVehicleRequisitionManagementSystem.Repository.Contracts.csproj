@@ -43,6 +43,7 @@
     <Compile Include="IDepartmentRepository.cs" />
     <Compile Include="IDriverRepository.cs" />
     <Compile Include="IEmployeeDesignationRepository.cs" />
+    <Compile Include="IEmployeeRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IVehicleRepository.cs" />
     <Compile Include="IVehicleTypeRepository.cs" />
