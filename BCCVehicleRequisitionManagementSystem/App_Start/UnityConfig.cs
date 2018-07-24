@@ -3,10 +3,12 @@ using System.Data.Entity;
 using BCCVehicleRequisitionManagementSystem.BLL.Contract;
 using BCCVehicleRequisitionManagementSystem.Controllers;
 using BCCVehicleRequisitionManagementSystem.Models.DatabaseContext;
+using BCCVehicleRequisitionManagementSystem.Models.EntityModels;
 using BCCVehicleRequisitionManagementSystem.Repository.Contracts;
 using BLL;
 using Unity;
 using Repository;
+using Unity.Attributes;
 using Unity.Injection;
 
 namespace BCCVehicleRequisitionManagementSystem
